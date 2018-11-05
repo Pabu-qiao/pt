@@ -7,7 +7,6 @@ import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -55,9 +54,10 @@ public class DataSourceConfig {
 	 * @Description: 配置数据源事务管理
 	 * @return
 	 */
-	@Bean
+	/*@Bean
 	@Primary
+	这个方式定义事务，会导致不能存入数据库
 	public DataSourceTransactionManager transactionManager() {
 		return new DataSourceTransactionManager(dataSource());
-	}
+	}*/
 }
