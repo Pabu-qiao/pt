@@ -1,0 +1,32 @@
+#前端对接通道
+spring:
+  application:
+    name: com.pt.health
+  message:
+    encoding: UTF-8
+  http: 
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  jpa:
+    show-sql: true
+    database: MYSQL
+    properties:
+      hibernate:
+        ddl-auto: update
+        dialect: org.hibernate.dialect.MySQL5Dialect
+
+server:
+  tomcat:
+    uri-encoding: UTF-8
+  port: 8180
+  servlet:
+    context-path: /health
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8001/eureka/  #指定Eureka注册中心url
+  instance:
+    prefer-ip-address: true
