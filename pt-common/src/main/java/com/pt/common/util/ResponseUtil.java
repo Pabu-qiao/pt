@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 
 /**
  * @ClassName: ResponseUtil
@@ -22,6 +23,6 @@ public class ResponseUtil {
 		if (temp instanceof String) {
 			return new ResponseEntity<String>(temp.toString(),header,HttpStatus.OK);
 		}
-		return new ResponseEntity<String>(JSON.toJSONString(temp),header,HttpStatus.OK);
+		return new ResponseEntity<String>(JSON.toJSONString(temp,SerializerFeature.DisableCircularReferenceDetect),header,HttpStatus.OK);
 	}
 }
