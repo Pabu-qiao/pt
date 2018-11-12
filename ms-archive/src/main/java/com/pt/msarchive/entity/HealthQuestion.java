@@ -24,7 +24,7 @@ import com.pt.msarchive.model.item.HealthQuestionItem;
  */
 @Entity
 @Table(name="health_question")
-public class HealthQuestion {
+public class HealthQuestion implements Cloneable{
 
 	@Id
 	@Column(name="id",columnDefinition="bigint(20)",updatable=false)
@@ -83,5 +83,16 @@ public class HealthQuestion {
 	}
 	public void setItems(List<HealthQuestionItem> items) {
 		this.items = JSON.toJSONString(items);
+	}
+	
+	public HealthQuestion clone() {
+		HealthQuestion clone=null;
+		try {
+			clone=(HealthQuestion) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clone;
 	}
 }

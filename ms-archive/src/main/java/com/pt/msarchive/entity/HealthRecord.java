@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="health_record")
-public class HealthRecord {
+public class HealthRecord implements Cloneable{
 
 	@Id
 	@Column(name="id",columnDefinition="bigint(20)",updatable=false)
@@ -32,7 +32,7 @@ public class HealthRecord {
 	private Date recordDate;
 	
 	@Column(name="record_time",columnDefinition="time",updatable=false,insertable=false)
-	private Date record_time;
+	private Date recordTime;
 	
 	@Column(name="data",columnDefinition="text",updatable=false)
 	private String data;
@@ -58,7 +58,7 @@ public class HealthRecord {
 	}
 
 	public Date getRecord_time() {
-		return record_time;
+		return recordTime;
 	}
 
 	public String getData() {
@@ -67,5 +67,18 @@ public class HealthRecord {
 
 	public void setData(String data) {
 		this.data = data;
+	}
+	
+	public HealthRecord clone() {
+		HealthRecord clone=null;
+		try {
+			clone= (HealthRecord) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		clone.recordDate=(Date) this.recordDate.clone();
+		clone.recordTime=(Date) this.recordTime.clone();
+		return clone;
 	}
 }

@@ -10,32 +10,33 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="fuWu")
-public class FuWu {
+@Table(name = "fuWu")
+public class FuWu implements Cloneable {
 
 	@Id
-	@Column(name="id",columnDefinition="int(11)")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "id", columnDefinition = "int(11)")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@Column(name="yingWenMing",columnDefinition="varchar(32)")
+
+	@Column(name = "yingWenMing", columnDefinition = "varchar(32)")
 	private String yingWenMing;
-	
-	@Column(name="zhongWenMing",columnDefinition="varchar(32)")
+
+	@Column(name = "zhongWenMing", columnDefinition = "varchar(32)")
 	private String zhongWenMing;
-	
-	@Column(name="shiChang",columnDefinition="int(11)")
+
+	@Column(name = "shiChang", columnDefinition = "int(11)")
 	private Integer shiChang;
-	
-	@Column(name="reDu",columnDefinition="int(11)")
+
+	@Column(name = "reDu", columnDefinition = "int(11)")
 	private Integer reDu;
-	
-	@Column(name="jiaGe",columnDefinition="decimal(12)")
+
+	@Column(name = "jiaGe", columnDefinition = "decimal(12)")
 	private BigDecimal jiaGe;
-	
-	
-	/*@ManyToMany(mappedBy="machines")
-	private Set<Symptom> symptoms=new HashSet<Symptom>();*/
+
+	/*
+	 * @ManyToMany(mappedBy="machines") private Set<Symptom> symptoms=new
+	 * HashSet<Symptom>();
+	 */
 
 	public Integer getId() {
 		return id;
@@ -84,14 +85,22 @@ public class FuWu {
 	public void setJiaGe(BigDecimal jiaGe) {
 		this.jiaGe = jiaGe;
 	}
-	
 
-	/*public Set<Symptom> getSymptoms() {
-		return symptoms;
+	/*
+	 * public Set<Symptom> getSymptoms() { return symptoms; }
+	 * 
+	 * public void setSymptoms(Set<Symptom> symptoms) { this.symptoms = symptoms; }
+	 */
+
+	public FuWu clone() {
+		FuWu clone = null;
+		try {
+			clone = (FuWu) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clone;
 	}
 
-	public void setSymptoms(Set<Symptom> symptoms) {
-		this.symptoms = symptoms;
-	}*/
-	
 }

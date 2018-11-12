@@ -18,7 +18,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="health_service")
-public class HealthService {
+public class HealthService implements Cloneable{
 
 	@Id
 	@Column(name="id",columnDefinition="bigint(20)",updatable=false)
@@ -61,5 +61,19 @@ public class HealthService {
 	public void setService(String service) {
 		this.service = service;
 	}
+
+	@Override
+	protected HealthService clone(){
+		HealthService clone=null;
+		try {
+			clone=(HealthService) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		clone.serviceDate=(Date) this.serviceDate.clone();
+		return clone;
+	}
+	
 	
 }

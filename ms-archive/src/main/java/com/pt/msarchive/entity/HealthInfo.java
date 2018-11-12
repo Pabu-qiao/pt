@@ -16,7 +16,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="health_info")
-public class HealthInfo {
+public class HealthInfo implements Cloneable{
 
 	
 	@Id
@@ -61,5 +61,18 @@ public class HealthInfo {
 
 	public Integer getVersion() {
 		return version;
+	}
+	
+	public HealthInfo clone() {
+		HealthInfo clone=null;
+		try {
+			clone = (HealthInfo) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		clone.create_date=(Date) this.create_date.clone();
+		clone.update_date=(Date) this.update_date.clone();
+		return clone;
 	}
 }

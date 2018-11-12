@@ -16,6 +16,7 @@ import com.pt.msarchive.entity.HealthInfo;
 import com.pt.msarchive.service.HealthInfoService;
 
 @Service
+@Transactional
 public class HealthInfoServiceImpl implements HealthInfoService{
 
 	@Autowired
@@ -38,7 +39,6 @@ public class HealthInfoServiceImpl implements HealthInfoService{
 	}
 	
 	@Override
-	@Transactional
 	public HealthInfo add(String customerId, JSONObject info) {
 		// TODO Auto-generated method stub
 		HealthInfo entity=new HealthInfo();
@@ -52,7 +52,6 @@ public class HealthInfoServiceImpl implements HealthInfoService{
 	}
 	
 	@Override
-	@Transactional
 	public HealthInfo update(String customerId, JSONObject info) {
 		// TODO Auto-generated method stub
 		Optional<HealthInfo> findById=healthInfoDao.findById(customerId);

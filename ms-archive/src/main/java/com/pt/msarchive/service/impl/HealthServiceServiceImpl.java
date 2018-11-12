@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -14,6 +15,7 @@ import com.pt.msarchive.entity.HealthService;
 import com.pt.msarchive.service.HealthServiceService;
 
 @Service
+@Transactional
 public class HealthServiceServiceImpl implements HealthServiceService {
 	
 	private final SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");

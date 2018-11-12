@@ -15,6 +15,7 @@ import com.pt.msarchive.entity.HealthRecord;
 import com.pt.msarchive.service.HealthRecordService;
 
 @Service
+@Transactional
 public class HealthRecordServiceImpl implements HealthRecordService {
 
 	private final SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
@@ -42,7 +43,6 @@ public class HealthRecordServiceImpl implements HealthRecordService {
 	}
 
 	@Override
-	@Transactional
 	public HealthRecord saveRecord(String customerId, JSONObject info) {
 		// TODO Auto-generated method stub
 		HealthRecord entity=new HealthRecord();
