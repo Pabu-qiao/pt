@@ -1,22 +1,21 @@
-#健康档案
+#推荐方案
 spring:
   application:
-    name: com.pt.msarchive
+    name: com.putai.msrecommend
   jpa:
     database: MYSQL
     properties:
       hibernate:
-        ddl-auto: update
         dialect: org.hibernate.dialect.MySQL5Dialect
 
 server:
-  port: 8181
+  port: 8182
   servlet:
-    context-path: /msarchive
+    context-path: /msrecommend
 
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8080/eureka/  #指定Eureka注册中心url
+      defaultZone: http://192.168.0.104:8080/eureka/  #指定Eureka注册中心url
   instance:
     prefer-ip-address: true

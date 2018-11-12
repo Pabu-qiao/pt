@@ -1,7 +1,7 @@
-#健康档案
+#推荐方案
 spring:
   application:
-    name: com.pt.msarchive
+    name: com.pt.msrecommend
   message:
     encoding: UTF-8
   http: 
@@ -20,9 +20,9 @@ spring:
 server:
   tomcat:
     uri-encoding: UTF-8
-  port: 8181
+  port: 8182
   servlet:
-    context-path: /msarchive
+    context-path: /msrecommend
 
 eureka:
   client:

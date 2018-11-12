@@ -53,5 +53,6 @@
 	<modules>
 		<module>ms-archive</module>
 		<module>pt-common</module>
+		<module>ms-recommend</module>
 	</modules>
 </project>
