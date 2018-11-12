@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pt.common.message.MessageModel;
-import com.pt.common.message.MessageProducer;
 import com.pt.common.message.MessageTag;
 import com.pt.common.message.MessageTopic;
+import com.pt.common.message.MessageProducer;
 
 /**
  * @ClassName: ProducerController
@@ -26,7 +26,7 @@ import com.pt.common.message.MessageTopic;
 @RequestMapping("/test")
 public class ProducerController {
 
-	private MessageProducer producer=MessageProducer.getInstance();
+	private MessageProducer messageProducer=MessageProducer.getInstance();
 	
 	@PostMapping("/addInfo")
 	public void addInfo(@RequestBody JSONObject jsonData) {
@@ -35,7 +35,7 @@ public class ProducerController {
 		model.setTag(MessageTag.PUTAI_MESSAGE_CREATE);
 		model.setId(jsonData.getString("customerId"));
 		model.setInfo(JSON.parseObject(jsonData.getString("data")));
-		producer.sendMessage(model);
+		messageProducer.sendMessage(model);
 		
 	}
 	
@@ -45,7 +45,7 @@ public class ProducerController {
 		model.setId(jsonData.getString("customerId"));
 		model.setTag(MessageTag.PUTAI_MESSAGE_UPDATE);
 		model.setInfo(JSON.parseObject(jsonData.getString("data")));
-		producer.sendMessage(model);
+		messageProducer.sendMessage(model);
 	}
 	
 	@PostMapping("/addService")
@@ -54,6 +54,6 @@ public class ProducerController {
 		model.setId(jsonData.getString("customerId"));
 		model.setTag(MessageTag.PUTAI_MESSAGE_CREATE);
 		model.setInfo(JSON.parseObject(jsonData.getString("data")));
-		producer.sendMessage(model);
+		messageProducer.sendMessage(model);
 	}
 }

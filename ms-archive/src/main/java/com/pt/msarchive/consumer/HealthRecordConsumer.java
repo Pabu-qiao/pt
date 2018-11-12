@@ -37,9 +37,9 @@ public class HealthRecordConsumer {
 
 	}
 
-	public static HealthRecordConsumer getInstance(String rocketUrl, HealthRecordService recordService) {
+	public static HealthRecordConsumer getInstance(String consumerName,String rocketUrl, HealthRecordService recordService) {
 		// 创建一个组名为archives_healthinfo的消费者
-		DefaultMQPushConsumer temp = new DefaultMQPushConsumer("archive_record");
+		DefaultMQPushConsumer temp = new DefaultMQPushConsumer(consumerName);
 		// 指定NameServer地址，多个地址以 ; 隔开
 		temp.setNamesrvAddr(rocketUrl);
 		temp.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);

@@ -11,6 +11,8 @@ import com.alibaba.rocketmq.client.producer.SendCallback;
 import com.alibaba.rocketmq.client.producer.SendResult;
 import com.alibaba.rocketmq.common.message.Message;
 import com.alibaba.rocketmq.remoting.exception.RemotingException;
+import com.pt.common.message.MessageModel;
+import com.pt.common.message.PutaiMessageQueueSelector;
 
 public class MessageProducer {
 
@@ -27,9 +29,9 @@ public class MessageProducer {
 		
 	}
 
-	public void init(String rocketmq_url) {
+	public void init(String producerName, String rocketmq_url) {
 		try {
-			producer = new DefaultMQProducer("archive_producer");
+			producer = new DefaultMQProducer(producerName);
 			producer.setNamesrvAddr(rocketmq_url);
 			producer.setRetryTimesWhenSendFailed(3);
 			producer.start();

@@ -48,10 +48,7 @@ public class HealthRecordServiceImpl implements HealthRecordService {
 		HealthRecord entity=new HealthRecord();
 		entity.setCustomerId(customerId);
 		entity.setData(JSON.toJSONString(info));
-		HealthRecord save = healthRecordDao.save(entity);
-		System.out.println(1);
-		System.out.println(save);
-		return null;
+		return healthRecordDao.save(entity);
 	}
 
 }

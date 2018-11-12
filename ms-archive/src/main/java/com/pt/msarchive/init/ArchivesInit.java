@@ -43,12 +43,12 @@ public class ArchivesInit implements ApplicationListener<ContextRefreshedEvent>{
 		// TODO Auto-generated method stub
 		log.info("-----------------------初始化完成-----------------------");
 		//初始化消息发送者
-		MessageProducer.getInstance().init(global.getRocketUrl());
+		MessageProducer.getInstance().init("producerName",global.getRocketUrl());
 		
 		//初始化healthInfoConsumer
-		HealthInfoConsumer.getInstance(global.getRocketUrl(), healtInfoService).start();
-		HealthRecordConsumer.getInstance(global.getRocketUrl(), recordService).start();
-		HealthServiceConsumer.getInstance(global.getRocketUrl(), serviceService).start();
+		HealthInfoConsumer.getInstance("infoConsumer",global.getRocketUrl(), healtInfoService).start();
+		HealthRecordConsumer.getInstance("recordConsumer",global.getRocketUrl(), recordService).start();
+		HealthServiceConsumer.getInstance("serviceConsumer",global.getRocketUrl(), serviceService).start();
 	}
 
 }
