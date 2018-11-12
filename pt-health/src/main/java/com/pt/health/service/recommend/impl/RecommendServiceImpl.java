@@ -1,5 +1,8 @@
 package com.pt.health.service.recommend.impl;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.stereotype.Service;
 
 import com.pt.common.msApi.MsApplication;
@@ -16,6 +19,15 @@ public class RecommendServiceImpl implements RecommendService {
 		// TODO Auto-generated method stub
 		String url = EurekaUtil.getInstance().getServiceUrl(MsApplication.MSRECOMMEND, RecommendApi.ZHENGZHUANGS);
 		return RestUtil.getResult(url);
+	}
+
+	@Override
+	public String getRecommendPlan(String zhengZhuangs) {
+		// TODO Auto-generated method stub
+		String url = EurekaUtil.getInstance().getServiceUrl(MsApplication.MSRECOMMEND, RecommendApi.RECOMMENDS);
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("zhengZhuangs", zhengZhuangs);
+		return RestUtil.getResult(url, map);
 	}
 
 }
