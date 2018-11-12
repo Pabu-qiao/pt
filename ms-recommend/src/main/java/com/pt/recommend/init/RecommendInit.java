@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import com.pt.common.message.MessageProducer;
 import com.pt.recommend.config.Global;
 import com.pt.recommend.consumer.RecommendConsumer;
-import com.pt.recommend.service.IZhengZhuangService;
+import com.pt.recommend.service.ZhengZhuangService;
 
 /**
  * @ClassName: RecommendInit
@@ -25,7 +25,7 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 	private static final Logger log = LoggerFactory.getLogger(RecommendInit.class);
 
 	@Autowired
-	private IZhengZhuangService zhengZhuangService;
+	private ZhengZhuangService zhengZhuangService;
 	@Autowired
 	private Global global;
 

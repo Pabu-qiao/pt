@@ -30,4 +30,13 @@ public class RecommendServiceImpl implements RecommendService {
 		return RestUtil.getResult(url, map);
 	}
 
+	@Override
+	public String getPlansByZhuSu(String ids) {
+		// TODO Auto-generated method stub
+		String url = EurekaUtil.getInstance().getServiceUrl(MsApplication.MSRECOMMEND, RecommendApi.PLANS);
+		Map<String, String> map=new HashMap<String, String>();
+		map.put("id", ids);
+		return RestUtil.getResult(url,map);
+	}
+
 }

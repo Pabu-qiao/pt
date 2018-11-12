@@ -16,7 +16,7 @@ import com.alibaba.rocketmq.common.message.MessageExt;
 import com.pt.common.message.MessageModel;
 import com.pt.common.message.MessageTag;
 import com.pt.common.message.MessageTopic;
-import com.pt.recommend.service.IZhengZhuangService;
+import com.pt.recommend.service.ZhengZhuangService;
 
 /**
  * @ClassName: RecommendConsumer
@@ -30,7 +30,7 @@ public class RecommendConsumer {
 	private static final Logger log = LoggerFactory.getLogger(RecommendConsumer.class);
 
 	private DefaultMQPushConsumer consumer;
-	private IZhengZhuangService zhengZhuangService;
+	private ZhengZhuangService zhengZhuangService;
 
 	private final static RecommendConsumer INSTANCE = new RecommendConsumer();
 
@@ -38,7 +38,7 @@ public class RecommendConsumer {
 
 	}
 
-	public static RecommendConsumer getInstance(String consumerName, String rocketUrl, IZhengZhuangService zhengZhuangService) {
+	public static RecommendConsumer getInstance(String consumerName, String rocketUrl, ZhengZhuangService zhengZhuangService) {
 		// 创建一个组名为archives_healthinfo的消费者
 		DefaultMQPushConsumer temp = new DefaultMQPushConsumer(consumerName);
 		// 指定NameServer地址，多个地址以 ; 隔开

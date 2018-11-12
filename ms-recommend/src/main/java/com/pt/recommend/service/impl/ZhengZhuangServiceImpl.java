@@ -8,11 +8,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pt.recommend.dao.ZhengZhuangDao;
 import com.pt.recommend.entity.ZhengZhuang;
-import com.pt.recommend.service.IZhengZhuangService;
+import com.pt.recommend.service.ZhengZhuangService;
 
 @Service
 @Transactional
-public class ZhengZhuangServiceImpl implements IZhengZhuangService {
+public class ZhengZhuangServiceImpl implements ZhengZhuangService {
 
 	@Autowired
 	private ZhengZhuangDao dao;

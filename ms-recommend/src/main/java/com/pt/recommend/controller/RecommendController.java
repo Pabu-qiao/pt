@@ -19,13 +19,13 @@ import com.pt.common.util.ResponseUtil;
 import com.pt.recommend.entity.FuWu;
 import com.pt.recommend.entity.ZhengZhuang;
 import com.pt.recommend.model.Plan;
-import com.pt.recommend.service.IZhengZhuangService;
+import com.pt.recommend.service.ZhengZhuangService;
 
 @RestController
 public class RecommendController {
 
 	@Autowired
-	private IZhengZhuangService iZhengZhuangService;
+	private ZhengZhuangService zhengZhuangService;
 	
 	
 	@GetMapping("/recommends")
@@ -34,7 +34,7 @@ public class RecommendController {
 		String[] split = params.split(",");
 		List<String> zhengzhuangs = Arrays.asList(split);
 		
-		List<ZhengZhuang> all = iZhengZhuangService.getPlanByZhengZhuang(zhengzhuangs);
+		List<ZhengZhuang> all = zhengZhuangService.getPlanByZhengZhuang(zhengzhuangs);
 		List<Plan> result = new ArrayList<Plan>();
 		Set<FuWu> machines = new HashSet<FuWu>();
 		if (all.size() > 0) {
@@ -47,7 +47,7 @@ public class RecommendController {
 	
 	@GetMapping("/zhengZhuangs")
 	public ResponseEntity<String> getAllZhengZhuang(){
-		List<ZhengZhuang> all = iZhengZhuangService.getAllZhengZhuang();
+		List<ZhengZhuang> all = zhengZhuangService.getAllZhengZhuang();
 		Map<String, List<ZhengZhuang>> map = new HashMap<String, List<ZhengZhuang>>();
 		for (ZhengZhuang zhengZhuang : all) {
 			ZhengZhuang clone = zhengZhuang.clone();

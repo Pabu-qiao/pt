@@ -27,4 +27,10 @@ public class RecommendController {
 		String temp = recommendService.getRecommendPlan(zhengZhuangs);
 		return ResponseUtil.toJson(temp);
 	}
+	
+	@GetMapping("/plans")
+	public ResponseEntity<String> getPlansByZhuSu(@RequestParam String id){
+		String temp = recommendService.getPlansByZhuSu(id);
+		return ResponseUtil.toJson(temp);
+	}
 }

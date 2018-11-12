@@ -8,6 +8,7 @@ public interface RecommendService {
 	 * @return
 	 */
 	String getAllZhengZhuangs();
+	
 	/**
 	 * @Title: getRecommendPlan
 	 * @Description: 根据症状获得推荐方案
@@ -15,4 +16,12 @@ public interface RecommendService {
 	 * @return
 	 */
 	String getRecommendPlan(String zhengZhuangs);
+	
+	/**
+	 * @Title: getPlansByZhuSu
+	 * @Description: 根据主诉，获得推荐方案（定义好的方案）
+	 * @param id
+	 * @return
+	 */
+	String getPlansByZhuSu(String ids);
 }

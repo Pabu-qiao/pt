@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.pt.recommend.entity.ZhengZhuang;
 
-public interface IZhengZhuangService {
+public interface ZhengZhuangService {
 	
 	/**
 	 * @Title: getPlanBySymptoms
