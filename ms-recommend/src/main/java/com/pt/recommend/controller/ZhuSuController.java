@@ -1,7 +1,9 @@
 package com.pt.recommend.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pt.common.util.ResponseUtil;
+import com.pt.recommend.entity.FangAn;
+import com.pt.recommend.entity.ZhuSu;
 import com.pt.recommend.service.ZhuSuService;
 
 @RestController
@@ -26,11 +30,22 @@ public class ZhuSuController {
 		for (String str : split) {
 			ids.add(new Integer(str));
 		}
-		return ResponseUtil.toJson(zhuSuService.getPlanByZhuSuId(ids));
+		
+		List<ZhuSu> list = zhuSuService.getPlanByZhuSuId(ids);
+		Set<FangAn> fangAns=new HashSet<FangAn>();
+		for (ZhuSu zhuSu : list) {
+			fangAns.add(zhuSu.getFangAn());
+		}
+		
+		return ResponseUtil.toJson(fangAns);
 	}
 	
 	@GetMapping("/zhuSus")
 	public ResponseEntity<String> getAllZhuSu(){
-		return ResponseUtil.toJson(zhuSuService.getAllZhuSu());
+		List<ZhuSu> list = zhuSuService.getAllZhuSu();
+		for (ZhuSu zhuSu : list) {
+			zhuSu.setFangAn(null);
+		}
+		return ResponseUtil.toJson(list);
 	}
 }

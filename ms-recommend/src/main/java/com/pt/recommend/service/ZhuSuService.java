@@ -1,10 +1,8 @@
 package com.pt.recommend.service;
 
 import java.util.List;
-import java.util.Set;
 
 import com.pt.common.service.RecommendBaseService;
-import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
 
 
@@ -16,7 +14,7 @@ public interface ZhuSuService extends RecommendBaseService{
 	 * @param ids
 	 * @return
 	 */
-	Set<FangAn> getPlanByZhuSuId(List<Integer> ids);
+	List<ZhuSu> getPlanByZhuSuId(List<Integer> ids);
 	
 	/**
 	 * @Title: getAllZhuSu
