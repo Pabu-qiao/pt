@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.pt.common.message.MessageProducer;
+import com.pt.common.message.MessageTag;
 import com.pt.common.message.MessageTopic;
 import com.pt.recommend.config.Global;
 import com.pt.recommend.consumer.RecommendConsumer;
@@ -46,7 +47,7 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 			.setConsumerGroup("recommendConsumer")
 			.setNamesrvAddr(global.getRocketUrl())
 			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
-			.setSubscribe(MessageTopic.HEALTHINFO, "*")
+			.setSubscribe(MessageTopic.putaiArchive, MessageTag.ALL)
 			.setConsumeThreadMax(100)
 			.setConsumeThreadMin(10)
 			.setConsumeMessageBatchMaxSize(100)

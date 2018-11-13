@@ -2,6 +2,7 @@ package com.pt.msarchive.service;
 
 import java.util.List;
 
+import com.pt.common.service.ArchiveBaseService;
 import com.pt.msarchive.entity.HealthQuestion;
 import com.pt.msarchive.enums.QUESTION_ORIGIN;
 
@@ -12,7 +13,7 @@ import com.pt.msarchive.enums.QUESTION_ORIGIN;
  * @date 2018年11月2日
  *
  */
-public interface HealthQuestionService {
+public interface HealthQuestionService extends ArchiveBaseService{
 
 	List<HealthQuestion> getAll();
 	List<HealthQuestion> getByOrigin(QUESTION_ORIGIN origin);

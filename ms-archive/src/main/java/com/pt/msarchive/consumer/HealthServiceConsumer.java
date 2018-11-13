@@ -2,6 +2,7 @@ package com.pt.msarchive.consumer;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,9 @@ import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
 import com.pt.common.message.MessageModel;
+import com.pt.common.message.MessageTag;
 import com.pt.common.message.MessageTopic;
+import com.pt.common.service.ArchiveBaseService;
 import com.pt.msarchive.service.HealthServiceService;
 
 /**
@@ -29,36 +32,69 @@ public class HealthServiceConsumer {
 	private static final Logger log = LoggerFactory.getLogger(HealthServiceConsumer.class);
 
 	private DefaultMQPushConsumer consumer;
-	private HealthServiceService service;
+	private HealthServiceService healthService;
 
 	private final static HealthServiceConsumer INSTANCE = new HealthServiceConsumer();
 
-	private HealthServiceConsumer() {
+	private HealthServiceConsumer() {}
 
-	}
-
-	public static HealthServiceConsumer getInstance(String consumerName,String rocketUrl, HealthServiceService service) {
-		// 创建一个组名为archives_healthinfo的消费者
-		DefaultMQPushConsumer temp = new DefaultMQPushConsumer(consumerName);
-		// 指定NameServer地址，多个地址以 ; 隔开
-		temp.setNamesrvAddr(rocketUrl);
-		temp.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
-		try {
-			// 可订阅多个tag,源码中用||区分不同tag,*代表所有tag，但是一个消息只能有一个tag
-			temp.subscribe(MessageTopic.HEALTHSERVICE, "*");
-			// 可以订阅多个topic
-			// temp.subscribe("", "*");
-		} catch (MQClientException e) {
-			e.printStackTrace();
+	public static class Builder{
+		private final static Builder BUILDER = new Builder();
+		private Builder(){}
+		public static Builder getInstance() {
+			return BUILDER;
 		}
-
-		temp.setConsumeThreadMax(100);
-		temp.setConsumeThreadMin(10);
-		temp.setConsumeMessageBatchMaxSize(100);
-
-		INSTANCE.consumer = temp;
-		INSTANCE.service = service;
-		return INSTANCE;
+		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
+		
+		public Builder setConsumerGroup(String consumerGroup) {
+			BUILDER.consumer.setConsumerGroup(consumerGroup);
+			return BUILDER;
+		}
+		public Builder setNamesrvAddr(String namesrvAddr) {
+			BUILDER.consumer.setNamesrvAddr(namesrvAddr);
+			return BUILDER;
+		}
+		public Builder setConsumeFromWhere(ConsumeFromWhere fromWhere) {
+			BUILDER.consumer.setConsumeFromWhere(fromWhere);
+			return BUILDER;
+		}
+		public Builder setSubscribe(MessageTopic messageTopic,MessageTag messageTag) {
+			String topic=messageTopic.toString();
+			String tag=messageTag.toString();
+			tag=StringUtils.equalsIgnoreCase("all", tag)?"*":tag;
+			try {
+				BUILDER.consumer.subscribe(topic, tag);
+			} catch (MQClientException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return BUILDER;
+		}
+		public Builder setConsumeThreadMax(Integer consumeThreadMax) {
+			BUILDER.consumer.setConsumeThreadMax(consumeThreadMax);
+			return BUILDER;
+		}
+		public Builder setConsumeThreadMin(Integer consumeThreadMin) {
+			BUILDER.consumer.setConsumeThreadMin(consumeThreadMin);
+			return BUILDER;
+		}
+		public Builder setConsumeMessageBatchMaxSize(Integer consumeMessageBatchMaxSize) {
+			BUILDER.consumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
+			return BUILDER;
+		}
+		public Builder setServices(ArchiveBaseService...services) {
+			for (ArchiveBaseService service : services) {
+				if (service instanceof HealthServiceService) {
+					INSTANCE.healthService=(HealthServiceService) service;
+					log.info("healthService:{}",service);
+				}
+			}
+			return BUILDER;
+		}
+		public HealthServiceConsumer build() {
+			INSTANCE.consumer=consumer;
+			return INSTANCE;
+		}
 	}
 
 	public void start() {
@@ -68,13 +104,13 @@ public class HealthServiceConsumer {
 						ConsumeConcurrentlyContext context) {
 					for (MessageExt msg : msgs) {
 						try {
-							if (MessageTopic.HEALTHSERVICE.equals(msg.getTopic())) {
+							if (MessageTopic.putaiArchive.toString().equals(msg.getTopic())) {
 								MessageModel model = JSON.parseObject(new String(msg.getBody()), MessageModel.class);
 								if(model==null) {
 									log.warn("消息内容为空");
 									return null;
 								}
-								service.saveRecord(model.getId(), model.getInfo());
+								healthService.saveRecord(model.getId(), model.getInfo());
 								log.info("保存一条服务记录");
 							}
 						} catch (Exception e) {

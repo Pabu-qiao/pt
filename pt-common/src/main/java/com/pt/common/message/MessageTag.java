@@ -1,8 +1,19 @@
 package com.pt.common.message;
 
-public class MessageTag {
-
-	public static final String PUTAI_MESSAGE_CREATE = "putai_message_create";
-	public static final String PUTAI_MESSAGE_UPDATE = "putai_message_update";
+public enum MessageTag {
+	
+	/**
+	 * @Fields ALL:所有
+	 */
+	ALL,
+	/**
+	 * @Fields putai_message_create:创建
+	 */
+	putai_message_create,
+	
+	/**
+	 * @Fields putai_message_update:更新
+	 */
+	putai_message_update;
 	
 }

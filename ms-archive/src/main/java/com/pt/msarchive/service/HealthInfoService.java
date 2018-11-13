@@ -3,6 +3,7 @@ package com.pt.msarchive.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pt.common.service.ArchiveBaseService;
 import com.pt.msarchive.entity.HealthInfo;
 
 /**
@@ -12,7 +13,7 @@ import com.pt.msarchive.entity.HealthInfo;
  * @date 2018年10月23日
  *
  */
-public interface HealthInfoService {
+public interface HealthInfoService extends ArchiveBaseService{
 
 	/**
 	 * @Title: getAll

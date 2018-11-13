@@ -30,9 +30,9 @@ public class ProducerController {
 	
 	@PostMapping("/addInfo")
 	public void addInfo(@RequestBody JSONObject jsonData) {
-		MessageModel model=new MessageModel(MessageTopic.HEALTHINFO);
-		model.setTopic(MessageTopic.HEALTHINFO);
-		model.setTag(MessageTag.PUTAI_MESSAGE_CREATE);
+		MessageModel model=new MessageModel(MessageTopic.putaiArchive);
+		model.setTopic(MessageTopic.putaiArchive);
+		model.setTag(MessageTag.putai_message_create);
 		model.setId(jsonData.getString("customerId"));
 		model.setInfo(JSON.parseObject(jsonData.getString("data")));
 		messageProducer.sendMessage(model);
@@ -41,18 +41,18 @@ public class ProducerController {
 	
 	@PutMapping("/updateInfo")
 	public void updateInfo(@RequestBody JSONObject jsonData) {
-		MessageModel model=new MessageModel(MessageTopic.HEALTHINFO);
+		MessageModel model=new MessageModel(MessageTopic.putaiArchive);
 		model.setId(jsonData.getString("customerId"));
-		model.setTag(MessageTag.PUTAI_MESSAGE_UPDATE);
+		model.setTag(MessageTag.putai_message_update);
 		model.setInfo(JSON.parseObject(jsonData.getString("data")));
 		messageProducer.sendMessage(model);
 	}
 	
 	@PostMapping("/addService")
 	public void addService(@RequestBody JSONObject jsonData) {
-		MessageModel model=new MessageModel(MessageTopic.HEALTHSERVICE);
+		MessageModel model=new MessageModel(MessageTopic.putaiArchive);
 		model.setId(jsonData.getString("customerId"));
-		model.setTag(MessageTag.PUTAI_MESSAGE_CREATE);
+		model.setTag(MessageTag.putai_message_create);
 		model.setInfo(JSON.parseObject(jsonData.getString("data")));
 		messageProducer.sendMessage(model);
 	}

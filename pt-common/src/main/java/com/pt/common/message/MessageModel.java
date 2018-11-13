@@ -4,12 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 
 public class MessageModel {
 
-	private String topic;
-	private String tag;
+	private MessageTopic topic;
+	private MessageTag tag;
 	private String id;
 	private JSONObject info;
 	
-	public MessageModel(String topic) {
+	public MessageModel(MessageTopic topic) {
 		super();
 		this.topic = topic;
 	}
@@ -19,10 +19,10 @@ public class MessageModel {
 	}
 
 	public String getTopic() {
-		return this.topic;
+		return this.topic.toString();
 	}
 
-	public void setTopic(String topic) {
+	public void setTopic(MessageTopic topic) {
 		this.topic = topic;
 	}
 
@@ -35,10 +35,10 @@ public class MessageModel {
 	}
 
 	public String getTag() {
-		return this.tag;
+		return this.tag.toString();
 	}
 
-	public void setTag(String tag) {
+	public void setTag(MessageTag tag) {
 		this.tag = tag;
 	}
 

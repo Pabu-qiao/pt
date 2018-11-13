@@ -2,6 +2,7 @@ package com.pt.recommend.consumer;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,7 +60,10 @@ public class RecommendConsumer {
 			BUILDER.consumer.setConsumeFromWhere(fromWhere);
 			return BUILDER;
 		}
-		public Builder setSubscribe(String topic,String tag) {
+		public Builder setSubscribe(MessageTopic messageTopic,MessageTag messageTag) {
+			String topic=messageTopic.toString();
+			String tag=messageTag.toString();
+			tag=StringUtils.equalsIgnoreCase("all", tag)?"*":tag;
 			try {
 				BUILDER.consumer.subscribe(topic, tag);
 			} catch (MQClientException e) {
@@ -130,18 +134,18 @@ public class RecommendConsumer {
 						ConsumeConcurrentlyContext context) {
 					for (MessageExt msg : msgs) {
 						try {
-							if (MessageTopic.HEALTHINFO.equals(msg.getTopic())) {
+							if (MessageTopic.putaiArchive.toString().equals(msg.getTopic())) {
 								MessageModel model = JSON.parseObject(new String(msg.getBody()), MessageModel.class);
 								if(model==null) {
 									log.warn("消息内容为空");
 									return null;
 								}
 								//新增客户
-								if (MessageTag.PUTAI_MESSAGE_CREATE.equals(msg.getTags())) {
+								if (MessageTag.putai_message_create.toString().equals(msg.getTags())) {
 									log.info("新增用户");
 								}
 								//更新老客户
-								if (MessageTag.PUTAI_MESSAGE_UPDATE.equals(msg.getTags())) {
+								if (MessageTag.putai_message_update.toString().equals(msg.getTags())) {
 									log.info("更新用户");
 								}
 							}

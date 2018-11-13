@@ -22,9 +22,9 @@ public class ProducerController {
 	
 	@GetMapping("/add")
 	public String add() {
-		MessageModel model=new MessageModel(MessageTopic.HEALTHINFO);
-		model.setTopic(MessageTopic.HEALTHINFO);
-		model.setTag(MessageTag.PUTAI_MESSAGE_CREATE);
+		MessageModel model=new MessageModel(MessageTopic.putaiArchive);
+		model.setTopic(MessageTopic.putaiArchive);
+		model.setTag(MessageTag.putai_message_create);
 		model.setId("123");
 		producer.sendMessage(model);
 		return "add";
@@ -32,9 +32,9 @@ public class ProducerController {
 	
 	@GetMapping("/update")
 	public String update() {
-		MessageModel model=new MessageModel(MessageTopic.HEALTHINFO);
-		model.setTopic(MessageTopic.HEALTHINFO);
-		model.setTag(MessageTag.PUTAI_MESSAGE_UPDATE);
+		MessageModel model=new MessageModel(MessageTopic.putaiArchive);
+		model.setTopic(MessageTopic.putaiArchive);
+		model.setTag(MessageTag.putai_message_update);
 		model.setId("123");
 		producer.sendMessage(model);
 		return "update";

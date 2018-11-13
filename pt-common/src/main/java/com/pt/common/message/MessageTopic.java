@@ -1,9 +1,11 @@
 package com.pt.common.message;
 
-public class MessageTopic {
+public enum MessageTopic {
 	
-	public static final String HEALTHINFO = "putaiArchive";
-	public static final String HEALTHSERVICE = "putaiArchive";
+	/**
+	 * @Fields putaiArchive:笔记本的RocketMQ暂时只能支持这个topic。
+	 */
+	putaiArchive;
 	
 	
 }
