@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -18,6 +19,8 @@ import com.pt.common.message.MessageModel;
 import com.pt.common.message.MessageTag;
 import com.pt.common.message.MessageTopic;
 import com.pt.common.service.RecommendBaseService;
+import com.pt.recommend.entity.FangAn;
+import com.pt.recommend.entity.ZhuSu;
 import com.pt.recommend.service.ZhengZhuangService;
 import com.pt.recommend.service.ZhuSuService;
 
@@ -134,20 +137,22 @@ public class RecommendConsumer {
 						ConsumeConcurrentlyContext context) {
 					for (MessageExt msg : msgs) {
 						try {
-							if (MessageTopic.putaiArchive.toString().equals(msg.getTopic())) {
-								MessageModel model = JSON.parseObject(new String(msg.getBody()), MessageModel.class);
-								if(model==null) {
-									log.warn("消息内容为空");
-									return null;
-								}
-								//新增客户
-								if (MessageTag.putai_message_create.toString().equals(msg.getTags())) {
-									log.info("新增用户");
-								}
-								//更新老客户
-								if (MessageTag.putai_message_update.toString().equals(msg.getTags())) {
-									log.info("更新用户");
-								}
+							MessageModel model = JSON.parseObject(new String(msg.getBody()), MessageModel.class);
+							if(model==null) {
+								log.warn("消息内容为空");
+								return null;
+							}
+							//新增客户
+							if (MessageTag.zhuSu_create.toString().equals(msg.getTags())) {
+								log.info("新增用户");
+								JSONObject info = model.getInfo();
+								ZhuSu zhuSu = JSON.parseObject(info.getString("zhuSu"),ZhuSu.class);
+								FangAn fangAn = JSON.parseObject(info.getString("fangAn"),FangAn.class);
+								zhuSuService.saveZhuSu(zhuSu, fangAn);
+							}
+							//更新老客户
+							if (MessageTag.putai_message_update.toString().equals(msg.getTags())) {
+								log.info("更新用户");
 							}
 						} catch (Exception e) {
 							e.printStackTrace();

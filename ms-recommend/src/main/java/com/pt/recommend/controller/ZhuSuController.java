@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.pt.common.message.MessageModel;
+import com.pt.common.message.MessageProducer;
+import com.pt.common.message.MessageTag;
+import com.pt.common.message.MessageTopic;
 import com.pt.common.util.ResponseUtil;
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
@@ -27,6 +32,8 @@ public class ZhuSuController {
 	private ZhuSuService zhuSuService;
 	@Autowired
 	private FangAnService fangAnService;
+	
+	private MessageProducer producer=MessageProducer.getInstance();
 	
 	@GetMapping("/plans")
 	public ResponseEntity<String> getPlanByZhuSus(@RequestParam String id){
@@ -65,6 +72,19 @@ public class ZhuSuController {
 		ZhuSu zhuSu=new ZhuSu();
 		zhuSu.setId(new Integer(id));
 		zhuSu.setName(name);
-		return ResponseUtil.toJson(zhuSuService.saveZhuSu(zhuSu, fangAn));
+		
+		MessageModel model=new MessageModel();
+		model.setTopic(MessageTopic.putaiArchive);
+		model.setTag(MessageTag.zhuSu_create);
+		model.setId(zhuSu.getId()+"");
+		
+		JSONObject info=new JSONObject();
+		info.put("zhuSu", JSON.toJSONString(zhuSu));
+		info.put("fangAn", JSON.toJSONString(fangAn));
+		model.setInfo(info);
+		
+		producer.sendMessage(model);
+		
+		return ResponseUtil.toJson("新增完成");
 	}
 }

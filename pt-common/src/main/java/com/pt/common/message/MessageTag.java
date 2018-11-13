@@ -14,6 +14,8 @@ public enum MessageTag {
 	/**
 	 * @Fields putai_message_update:更新
 	 */
-	putai_message_update;
+	putai_message_update,
+	
+	zhuSu_create;
 	
 }
