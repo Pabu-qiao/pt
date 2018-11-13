@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="fang_an")
-public class FangAn {
+public class FangAn implements Cloneable {
 
 	@Id
 	@Column(name="id",columnDefinition="int(11)")
@@ -61,4 +61,14 @@ public class FangAn {
 		this.reDu = reDu;
 	}
 	
+	public FangAn clone() {
+		FangAn clone=null;
+		try {
+			clone=(FangAn) super.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clone;
+	}
 }

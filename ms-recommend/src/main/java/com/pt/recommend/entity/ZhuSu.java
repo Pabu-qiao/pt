@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="zhu_su")
-public class ZhuSu {
+public class ZhuSu implements Cloneable{
 
 	@Id
 	@Column(name="id",columnDefinition="int(11)")
@@ -42,6 +42,18 @@ public class ZhuSu {
 	}
 	public void setFangAn(FangAn fangAn) {
 		this.fangAn = fangAn;
+	}
+	
+	public ZhuSu clone() {
+		ZhuSu clone=null;
+		try {
+			clone=(ZhuSu) super.clone();
+			clone.fangAn=fangAn.clone();
+		} catch (CloneNotSupportedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return clone;
 	}
 	
 }

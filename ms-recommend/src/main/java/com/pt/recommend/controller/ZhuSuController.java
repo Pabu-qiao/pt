@@ -19,13 +19,18 @@ public class ZhuSuController {
 	private ZhuSuService zhuSuService;
 	
 	@GetMapping("/plans")
-	public ResponseEntity<String> getAll(@RequestParam String id){
+	public ResponseEntity<String> getPlanByZhuSus(@RequestParam String id){
 		id=id.replace("[", "").replace("]", "").replace("\"", "");
 		String[] split = id.split(",");
 		List<Integer> ids=new ArrayList<Integer>();
 		for (String str : split) {
 			ids.add(new Integer(str));
 		}
-		return ResponseUtil.toJson(zhuSuService.getByZhuSuId(ids));
+		return ResponseUtil.toJson(zhuSuService.getPlanByZhuSuId(ids));
+	}
+	
+	@GetMapping("/zhuSus")
+	public ResponseEntity<String> getAllZhuSu(){
+		return ResponseUtil.toJson(zhuSuService.getAllZhuSu());
 	}
 }
