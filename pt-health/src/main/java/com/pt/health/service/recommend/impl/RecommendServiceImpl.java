@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.pt.common.msApi.MsApplication;
 import com.pt.common.msApi.restApi.RecommendApi;
 import com.pt.common.util.EurekaUtil;
@@ -37,6 +38,20 @@ public class RecommendServiceImpl implements RecommendService {
 		Map<String, String> map=new HashMap<String, String>();
 		map.put("ids", ids);
 		return RestUtil.getResult(url,map);
+	}
+
+	@Override
+	public String getAllZhuSu() {
+		// TODO Auto-generated method stub
+		String url = EurekaUtil.getInstance().getServiceUrl(MsApplication.MSRECOMMEND, RecommendApi.ZHUSUS);
+		return RestUtil.getResult(url);
+	}
+
+	@Override
+	public String saveZhuSu(JSONObject jsonObject) {
+		// TODO Auto-generated method stub
+		String url = EurekaUtil.getInstance().getServiceUrl(MsApplication.MSRECOMMEND, RecommendApi.ZHUSUS);
+		return RestUtil.sendAsyncPost(url, null, jsonObject);
 	}
 
 }

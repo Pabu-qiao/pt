@@ -1,6 +1,6 @@
 package com.pt.health.service.recommend;
 
-import java.util.List;
+import com.alibaba.fastjson.JSONObject;
 
 public interface RecommendService {
 
@@ -26,4 +26,8 @@ public interface RecommendService {
 	 * @return
 	 */
 	String getPlansByZhuSu(String ids);
+	
+	String getAllZhuSu();
+	
+	String saveZhuSu(JSONObject jsonObject);
 }
