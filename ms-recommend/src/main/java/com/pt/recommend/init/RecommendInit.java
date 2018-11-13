@@ -7,10 +7,13 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
+import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.pt.common.message.MessageProducer;
+import com.pt.common.message.MessageTopic;
 import com.pt.recommend.config.Global;
 import com.pt.recommend.consumer.RecommendConsumer;
 import com.pt.recommend.service.ZhengZhuangService;
+import com.pt.recommend.service.ZhuSuService;
 
 /**
  * @ClassName: RecommendInit
@@ -27,6 +30,8 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 	@Autowired
 	private ZhengZhuangService zhengZhuangService;
 	@Autowired
+	private ZhuSuService zhuSuService;
+	@Autowired
 	private Global global;
 
 	@Override
@@ -37,7 +42,17 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 		MessageProducer.getInstance().init("recommendProducer", global.getRocketUrl());
 
 		// 初始化healthInfoConsumer
-		RecommendConsumer.getInstance("recommendConsumer", global.getRocketUrl(), zhengZhuangService).start();
+		RecommendConsumer.Builder.getInstance()
+			.setConsumerGroup("recommendConsumer")
+			.setNamesrvAddr(global.getRocketUrl())
+			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
+			.setSubscribe(MessageTopic.HEALTHINFO, "*")
+			.setConsumeThreadMax(100)
+			.setConsumeThreadMin(10)
+			.setConsumeMessageBatchMaxSize(100)
+			.setServices(zhengZhuangService,zhuSuService)
+			.build()
+			.start();
 	}
 
 }

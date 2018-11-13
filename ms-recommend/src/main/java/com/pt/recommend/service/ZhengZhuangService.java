@@ -2,9 +2,10 @@ package com.pt.recommend.service;
 
 import java.util.List;
 
+import com.pt.common.service.RecommendBaseService;
 import com.pt.recommend.entity.ZhengZhuang;
 
-public interface ZhengZhuangService {
+public interface ZhengZhuangService extends RecommendBaseService{
 	
 	/**
 	 * @Title: getPlanBySymptoms
