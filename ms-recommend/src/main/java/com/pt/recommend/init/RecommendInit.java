@@ -34,7 +34,7 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 		// TODO Auto-generated method stub
 		log.info("-----------------------初始化完成-----------------------");
 		// 初始化消息发送者
-		MessageProducer.getInstance().init("producerName", global.getRocketUrl());
+		MessageProducer.getInstance().init("recommendProducer", global.getRocketUrl());
 
 		// 初始化healthInfoConsumer
 		RecommendConsumer.getInstance("recommendConsumer", global.getRocketUrl(), zhengZhuangService).start();

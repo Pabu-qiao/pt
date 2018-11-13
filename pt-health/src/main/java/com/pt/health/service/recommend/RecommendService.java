@@ -1,5 +1,7 @@
 package com.pt.health.service.recommend;
 
+import java.util.List;
+
 public interface RecommendService {
 
 	/**
@@ -20,7 +22,7 @@ public interface RecommendService {
 	/**
 	 * @Title: getPlansByZhuSu
 	 * @Description: 根据主诉，获得推荐方案（定义好的方案）
-	 * @param id
+	 * @param ids
 	 * @return
 	 */
 	String getPlansByZhuSu(String ids);

@@ -29,8 +29,8 @@ public class RecommendController {
 	}
 	
 	@GetMapping("/plans")
-	public ResponseEntity<String> getPlansByZhuSu(@RequestParam String id){
-		String temp = recommendService.getPlansByZhuSu(id);
+	public ResponseEntity<String> getPlansByZhuSu(@RequestParam String ids){
+		String temp = recommendService.getPlansByZhuSu(ids);
 		return ResponseUtil.toJson(temp);
 	}
 }
