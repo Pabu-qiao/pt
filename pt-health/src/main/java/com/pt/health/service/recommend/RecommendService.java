@@ -27,7 +27,17 @@ public interface RecommendService {
 	 */
 	String getPlansByZhuSu(String ids);
 	
+	/**
+	 * @Title: getAllZhuSu
+	 * @Description: 查询所有主诉
+	 */
 	String getAllZhuSu();
 	
+	/**
+	 * @Title: saveZhuSu
+	 * @Description: 保存一条新的主诉
+	 * @param jsonObject
+	 * @return
+	 */
 	String saveZhuSu(JSONObject jsonObject);
 }
