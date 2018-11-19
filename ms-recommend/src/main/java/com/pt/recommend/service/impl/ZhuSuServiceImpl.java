@@ -23,6 +23,12 @@ public class ZhuSuServiceImpl implements ZhuSuService {
 		// TODO Auto-generated method stub
 		return zhuSuDao.findByIdIn(ids);
 	}
+	
+	@Override
+	public List<ZhuSu> getPlanByZhuSus(List<String> names) {
+		// TODO Auto-generated method stub
+		return zhuSuDao.findBynameIn(names);
+	}
 
 	@Override
 	public List<ZhuSu> getAllZhuSu() {
@@ -36,5 +42,6 @@ public class ZhuSuServiceImpl implements ZhuSuService {
 		zhuSu.setFangAn(fangAn);
 		return zhuSuDao.save(zhuSu);
 	}
+
 
 }

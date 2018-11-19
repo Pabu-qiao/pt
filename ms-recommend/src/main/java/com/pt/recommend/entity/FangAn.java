@@ -1,12 +1,17 @@
 package com.pt.recommend.entity;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +34,15 @@ public class FangAn implements Cloneable {
 	
 	@Column(name="re_du",columnDefinition="int(11)")
 	private Integer reDu;
+	
+	@Column(name="fan_wei",columnDefinition="text")
+	private String fanWei;
+	
+	@JoinTable(name = "fangAn_fuWu", 
+			joinColumns = {@JoinColumn(name = "fangAn_id", referencedColumnName = "id") }, 
+			inverseJoinColumns = {@JoinColumn(name = "fuWu_id", referencedColumnName = "id") })
+	@ManyToMany
+	private Set<FuWu> fuWu = new HashSet<FuWu>();
 	
 	public Integer getId() {
 		return id;
@@ -59,6 +73,18 @@ public class FangAn implements Cloneable {
 	}
 	public void setReDu(Integer reDu) {
 		this.reDu = reDu;
+	}
+	public String getFanWei() {
+		return fanWei;
+	}
+	public void setFanWei(String fanWei) {
+		this.fanWei = fanWei;
+	}
+	public Set<FuWu> getFuWu() {
+		return fuWu;
+	}
+	public void setFuWu(Set<FuWu> fuWu) {
+		this.fuWu = fuWu;
 	}
 	
 	public FangAn clone() {

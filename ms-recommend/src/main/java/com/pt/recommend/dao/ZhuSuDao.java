@@ -10,5 +10,6 @@ import com.pt.recommend.entity.ZhuSu;
 @Repository
 public interface ZhuSuDao extends JpaRepository<ZhuSu, Integer>{
 	List<ZhuSu> findByIdIn(List<Integer> ids);
+	List<ZhuSu> findBynameIn(List<String> names);
 	
 }

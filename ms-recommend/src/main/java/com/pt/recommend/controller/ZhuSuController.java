@@ -1,12 +1,14 @@
 package com.pt.recommend.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +28,7 @@ import com.pt.recommend.service.FangAnService;
 import com.pt.recommend.service.ZhuSuService;
 
 @RestController
+@CrossOrigin
 public class ZhuSuController {
 
 	@Autowired
@@ -45,6 +48,21 @@ public class ZhuSuController {
 		}
 		
 		List<ZhuSu> list = zhuSuService.getPlanByZhuSuId(ids);
+		Set<FangAn> fangAns=new HashSet<FangAn>();
+		for (ZhuSu zhuSu : list) {
+			fangAns.add(zhuSu.getFangAn());
+		}
+		
+		return ResponseUtil.toJson(fangAns);
+	}
+	
+	@GetMapping("/plans2")
+	public ResponseEntity<String> getPlanByZhuSu(@RequestParam String zhuSus){
+		zhuSus=zhuSus.replace("[", "").replace("]", "").replace("\"", "");
+		String[] split = zhuSus.split(",");
+		List<String> names = Arrays.asList(split);
+		
+		List<ZhuSu> list = zhuSuService.getPlanByZhuSus(names);
 		Set<FangAn> fangAns=new HashSet<FangAn>();
 		for (ZhuSu zhuSu : list) {
 			fangAns.add(zhuSu.getFangAn());

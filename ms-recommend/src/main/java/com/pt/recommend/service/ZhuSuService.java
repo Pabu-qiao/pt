@@ -15,6 +15,14 @@ public interface ZhuSuService extends RecommendBaseService {
 	 * @return
 	 */
 	List<ZhuSu> getPlanByZhuSuId(List<Integer> ids);
+	
+	/**
+	 * @Title: getPlanByZhuSus
+	 * @Description: 根据主诉，获得方案
+	 * @param name
+	 * @return
+	 */
+	List<ZhuSu> getPlanByZhuSus(List<String> names);
 
 	/**
 	 * @Title: getAllZhuSu
@@ -23,5 +31,12 @@ public interface ZhuSuService extends RecommendBaseService {
 	 */
 	List<ZhuSu> getAllZhuSu();
 
+	/**
+	 * @Title: saveZhuSu
+	 * @Description: 保存一条新的主诉
+	 * @param zhuSu
+	 * @param fangAn
+	 * @return
+	 */
 	ZhuSu saveZhuSu(ZhuSu zhuSu, FangAn fangAn);
 }
