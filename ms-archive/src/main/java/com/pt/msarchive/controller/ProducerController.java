@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.pt.common.message.MessageModel;
-import com.pt.common.message.MessageTag;
-import com.pt.common.message.MessageTopic;
-import com.pt.common.message.MessageProducer;
+import com.pt.msarchive.message.MessageModel;
+import com.pt.msarchive.message.MessageProducer;
+import com.pt.msarchive.message.MessageTag;
+import com.pt.msarchive.message.MessageTopic;
 
 /**
  * @ClassName: ProducerController

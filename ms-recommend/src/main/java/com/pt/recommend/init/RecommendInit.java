@@ -8,11 +8,11 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
-import com.pt.common.message.MessageProducer;
-import com.pt.common.message.MessageTag;
-import com.pt.common.message.MessageTopic;
 import com.pt.recommend.config.Global;
 import com.pt.recommend.consumer.RecommendConsumer;
+import com.pt.recommend.message.MessageProducer;
+import com.pt.recommend.message.MessageTag;
+import com.pt.recommend.message.MessageTopic;
 import com.pt.recommend.service.ZhengZhuangService;
 import com.pt.recommend.service.ZhuSuService;
 

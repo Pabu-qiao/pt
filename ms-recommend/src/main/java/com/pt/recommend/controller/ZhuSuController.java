@@ -17,15 +17,15 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.pt.common.message.MessageModel;
-import com.pt.common.message.MessageProducer;
-import com.pt.common.message.MessageTag;
-import com.pt.common.message.MessageTopic;
-import com.pt.common.util.ResponseUtil;
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
+import com.pt.recommend.message.MessageModel;
+import com.pt.recommend.message.MessageProducer;
+import com.pt.recommend.message.MessageTag;
+import com.pt.recommend.message.MessageTopic;
 import com.pt.recommend.service.FangAnService;
 import com.pt.recommend.service.ZhuSuService;
+import com.pt.recommend.util.ResponseUtil;
 
 @RestController
 @CrossOrigin

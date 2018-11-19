@@ -3,7 +3,6 @@ package com.pt.msarchive.service;
 import java.util.List;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pt.common.service.ArchiveBaseService;
 import com.pt.msarchive.entity.HealthRecord;
 
 public interface HealthRecordService extends ArchiveBaseService{

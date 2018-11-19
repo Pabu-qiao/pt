@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pt.common.util.ResponseUtil;
 import com.pt.recommend.entity.FuWu;
 import com.pt.recommend.entity.ZhengZhuang;
 import com.pt.recommend.model.Plan;
 import com.pt.recommend.service.ZhengZhuangService;
+import com.pt.recommend.util.ResponseUtil;
 
 @RestController
 public class RecommendController {

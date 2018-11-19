@@ -15,7 +15,6 @@
 
 	<modules>
 		<module>ms-archive</module>
-		<module>pt-common</module>
 		<module>ms-recommend</module>
 		<module>pt-serviceCenter</module>
 		<module>pt-health</module>

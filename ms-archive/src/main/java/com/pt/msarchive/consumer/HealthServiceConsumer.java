@@ -14,10 +14,10 @@ import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
-import com.pt.common.message.MessageModel;
-import com.pt.common.message.MessageTag;
-import com.pt.common.message.MessageTopic;
-import com.pt.common.service.ArchiveBaseService;
+import com.pt.msarchive.message.MessageModel;
+import com.pt.msarchive.message.MessageTag;
+import com.pt.msarchive.message.MessageTopic;
+import com.pt.msarchive.service.ArchiveBaseService;
 import com.pt.msarchive.service.HealthServiceService;
 
 /**

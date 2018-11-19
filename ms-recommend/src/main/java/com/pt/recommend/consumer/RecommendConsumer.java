@@ -15,12 +15,12 @@ import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
-import com.pt.common.message.MessageModel;
-import com.pt.common.message.MessageTag;
-import com.pt.common.message.MessageTopic;
-import com.pt.common.service.RecommendBaseService;
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
+import com.pt.recommend.message.MessageModel;
+import com.pt.recommend.message.MessageTag;
+import com.pt.recommend.message.MessageTopic;
+import com.pt.recommend.service.RecommendBaseService;
 import com.pt.recommend.service.ZhengZhuangService;
 import com.pt.recommend.service.ZhuSuService;
 

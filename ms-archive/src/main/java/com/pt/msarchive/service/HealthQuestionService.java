@@ -2,7 +2,6 @@ package com.pt.msarchive.service;
 
 import java.util.List;
 
-import com.pt.common.service.ArchiveBaseService;
 import com.pt.msarchive.entity.HealthQuestion;
 import com.pt.msarchive.enums.QUESTION_ORIGIN;
 

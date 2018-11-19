@@ -3,10 +3,10 @@ package com.pt.recommend.controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pt.common.message.MessageModel;
-import com.pt.common.message.MessageProducer;
-import com.pt.common.message.MessageTag;
-import com.pt.common.message.MessageTopic;
+import com.pt.recommend.message.MessageModel;
+import com.pt.recommend.message.MessageProducer;
+import com.pt.recommend.message.MessageTag;
+import com.pt.recommend.message.MessageTopic;
 
 /**
  * @ClassName: ProducerController
