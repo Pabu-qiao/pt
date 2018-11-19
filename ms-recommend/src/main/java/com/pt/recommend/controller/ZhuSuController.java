@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,7 +27,6 @@ import com.pt.recommend.service.ZhuSuService;
 import com.pt.recommend.util.ResponseUtil;
 
 @RestController
-@CrossOrigin
 public class ZhuSuController {
 
 	@Autowired

@@ -6,7 +6,7 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import com.netflix.discovery.EurekaClient;
-import com.pt.common.util.EurekaUtil;
+import com.pt.health.util.EurekaUtil;
 
 
 @Component

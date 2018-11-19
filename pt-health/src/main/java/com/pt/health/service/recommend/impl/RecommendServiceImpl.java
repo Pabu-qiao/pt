@@ -6,11 +6,11 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
-import com.pt.common.msApi.MsApplication;
-import com.pt.common.msApi.restApi.RecommendApi;
-import com.pt.common.util.EurekaUtil;
-import com.pt.common.util.RestUtil;
+import com.pt.health.msApi.MsApplication;
+import com.pt.health.msApi.restApi.RecommendApi;
 import com.pt.health.service.recommend.RecommendService;
+import com.pt.health.util.EurekaUtil;
+import com.pt.health.util.RestUtil;
 
 @Service
 public class RecommendServiceImpl implements RecommendService {
