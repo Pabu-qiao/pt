@@ -14,9 +14,7 @@ public class MessageModel {
 		this.topic = topic;
 	}
 	
-	public MessageModel() {
-		
-	}
+	public MessageModel() {}
 
 	public String getTopic() {
 		return this.topic.toString();

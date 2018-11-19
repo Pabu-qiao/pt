@@ -13,7 +13,7 @@ import org.springframework.context.annotation.PropertySource;
  */
 @SpringBootConfiguration
 @PropertySource(value = { "file:config/dbinfo.properties" })
-@ConfigurationProperties(prefix = "archive.datasource")
+@ConfigurationProperties(prefix = "jpa.datasource")
 public class DbInfo {
 
 	private Boolean onlyRead;
