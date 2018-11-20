@@ -93,7 +93,10 @@ public class RestUtil {
 	public static void sendAsyncPut(String url, Map<String, String> map,JSONObject jsonData) {
 		url="http://"+url;
 		RestTemplate restTemplate=new RestTemplate();
-		restTemplate.put(url, jsonData, map);
+		if (map!=null) {
+			restTemplate.put(url, jsonData, map);
+		}
+		restTemplate.put(url, jsonData);
 	}
 	
 	public static void sendAsyncDelete(String url, Map<String, String> map) {

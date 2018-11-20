@@ -1,6 +1,5 @@
 package com.pt.msarchive.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +20,6 @@ import com.pt.msarchive.message.MessageTopic;
  * @date 2018年11月5日
  *
  */
-@CrossOrigin
 @RestController
 @RequestMapping("/test")
 public class ProducerController {

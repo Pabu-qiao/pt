@@ -1,6 +1,7 @@
 package com.pt.recommend.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pt.recommend.message.MessageModel;
@@ -16,6 +17,7 @@ import com.pt.recommend.message.MessageTopic;
  *
  */
 @RestController
+@RequestMapping("/test")
 public class ProducerController {
 
 	private MessageProducer producer=MessageProducer.getInstance();

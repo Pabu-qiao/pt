@@ -152,6 +152,7 @@ public class RecommendConsumer {
 							}
 							//更新老客户
 							if (MessageTag.putai_message_update.toString().equals(msg.getTags())) {
+								zhengZhuangService.getAllZhengZhuang();
 								log.info("更新用户");
 							}
 						} catch (Exception e) {
