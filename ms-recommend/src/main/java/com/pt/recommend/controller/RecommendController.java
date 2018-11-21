@@ -38,7 +38,7 @@ public class RecommendController {
 		List<Plan> result = new ArrayList<Plan>();
 		Set<FuWu> machines = new HashSet<FuWu>();
 		if (all.size() > 0) {
-			abc(result, all, machines, 0);
+			Combination(result, all, machines, 0);
 		}
 		//筛选方案
 		List<Plan> temp = select(result);
@@ -61,7 +61,7 @@ public class RecommendController {
 	}
 	
 	
-	private void abc(List<Plan> result, List<ZhengZhuang> total, Set<FuWu> machines, Integer index) {
+	private void Combination(List<Plan> result, List<ZhengZhuang> total, Set<FuWu> machines, Integer index) {
 		ZhengZhuang symptom = total.get(index);
 		Set<FuWu> temp = symptom.getFuWu();
 		for (FuWu machine : temp) {
@@ -82,7 +82,7 @@ public class RecommendController {
 				}
 				result.add(plan);
 			} else {
-				abc(result, total, set, index + 1);
+				Combination(result, total, set, index + 1);
 			}
 		}
 	}
@@ -105,37 +105,32 @@ public class RecommendController {
 					hotPlan.setShiChang(plan.getShiChang());
 					hotPlan.setFangAnMing("火热爆款");
 				}
-				if (plans.size() > 1) {
-					if (timePlan.getShiChang() == null || plan.getShiChang() < timePlan.getShiChang()) {
-						timePlan.setFuWuXiang(plan.getFuWuXiang());
-						timePlan.setReDu(plan.getReDu());
-						;
-						timePlan.setJiaGe(plan.getJiaGe());
-						timePlan.setShiChang(plan.getShiChang());
-						timePlan.setFangAnMing("节省时间");
-					}
+				if (timePlan.getShiChang() == null || plan.getShiChang() < timePlan.getShiChang()) {
+					timePlan.setFuWuXiang(plan.getFuWuXiang());
+					timePlan.setReDu(plan.getReDu());
+					;
+					timePlan.setJiaGe(plan.getJiaGe());
+					timePlan.setShiChang(plan.getShiChang());
+					timePlan.setFangAnMing("节省时间");
 				}
-				if (plans.size() > 2) {
-					if (pricePlan.getJiaGe() == null || plan.getJiaGe().compareTo(pricePlan.getJiaGe()) < 0) {
-						pricePlan.setFuWuXiang(plan.getFuWuXiang());
-						pricePlan.setReDu(plan.getReDu());
-						;
-						pricePlan.setJiaGe(plan.getJiaGe());
-						pricePlan.setShiChang(plan.getShiChang());
-						pricePlan.setFangAnMing("经济实惠");
-					}
+				if (pricePlan.getJiaGe() == null || plan.getJiaGe().compareTo(pricePlan.getJiaGe()) < 0) {
+					pricePlan.setFuWuXiang(plan.getFuWuXiang());
+					pricePlan.setReDu(plan.getReDu());
+					;
+					pricePlan.setJiaGe(plan.getJiaGe());
+					pricePlan.setShiChang(plan.getShiChang());
+					pricePlan.setFangAnMing("经济实惠");
 				}
 			}
 
 			result.add(hotPlan);
-			if (plans.size() > 1) {
+			if (hotPlan.getFuWuXiang()!=timePlan.getFuWuXiang()) {
 				result.add(timePlan);
 			}
-			if (plans.size() > 2) {
+			if (hotPlan.getFuWuXiang()!=pricePlan.getFuWuXiang()&&timePlan.getFuWuXiang()!=pricePlan.getFuWuXiang()) {
 				result.add(pricePlan);
 			}
-			return result;
 		}
-		return null;
+		return result;
 	}
 }
