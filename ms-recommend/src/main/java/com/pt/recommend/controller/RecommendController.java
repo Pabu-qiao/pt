@@ -35,10 +35,9 @@ public class RecommendController {
 		List<String> zhengzhuangs = Arrays.asList(split);
 		
 		List<ZhengZhuang> all = zhengZhuangService.getPlanByZhengZhuang(zhengzhuangs);
-		List<Plan> result = new ArrayList<Plan>();
-		Set<FuWu> machines = new HashSet<FuWu>();
+		List<Plan> result = null;
 		if (all.size() > 0) {
-			Combination(result, all, machines, 0);
+			result = Combination(all, new HashSet<FuWu>() , 0);
 		}
 		//筛选方案
 		List<Plan> temp = select(result);
@@ -61,7 +60,8 @@ public class RecommendController {
 	}
 	
 	
-	private void Combination(List<Plan> result, List<ZhengZhuang> total, Set<FuWu> machines, Integer index) {
+	private List<Plan> Combination(List<ZhengZhuang> total, Set<FuWu> machines, Integer index) {
+		List<Plan> result= new ArrayList<Plan>();
 		ZhengZhuang symptom = total.get(index);
 		Set<FuWu> temp = symptom.getFuWu();
 		for (FuWu machine : temp) {
@@ -82,9 +82,10 @@ public class RecommendController {
 				}
 				result.add(plan);
 			} else {
-				Combination(result, total, set, index + 1);
+				result.addAll(Combination(total, set, index + 1));
 			}
 		}
+		return result;
 	}
 
 	private List<Plan> select(List<Plan> plans) {
