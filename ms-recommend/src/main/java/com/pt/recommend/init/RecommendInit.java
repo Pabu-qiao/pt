@@ -47,7 +47,7 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 			.setConsumerGroup("recommendConsumer")
 			.setNamesrvAddr(global.getRocketUrl())
 			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
-			.setSubscribe(MessageTopic.putaiArchive, MessageTag.ALL)
+			.setSubscribe(MessageTopic.PUTAI_ARCHIVE, MessageTag.ALL)
 			.setConsumeThreadMax(100)
 			.setConsumeThreadMin(10)
 			.setConsumeMessageBatchMaxSize(100)

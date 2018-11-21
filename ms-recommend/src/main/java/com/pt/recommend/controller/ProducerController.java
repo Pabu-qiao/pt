@@ -24,9 +24,9 @@ public class ProducerController {
 	
 	@GetMapping("/add")
 	public String add() {
-		MessageModel model=new MessageModel(MessageTopic.putaiArchive);
-		model.setTopic(MessageTopic.putaiArchive);
-		model.setTag(MessageTag.putai_message_create);
+		MessageModel model=new MessageModel(MessageTopic.PUTAI_ARCHIVE);
+		model.setTopic(MessageTopic.PUTAI_ARCHIVE);
+		model.setTag(MessageTag.PUTAI_MESSAGE_CREATE);
 		model.setId("123");
 		producer.sendMessage(model);
 		return "add";
@@ -34,9 +34,9 @@ public class ProducerController {
 	
 	@GetMapping("/update")
 	public String update() {
-		MessageModel model=new MessageModel(MessageTopic.putaiArchive);
-		model.setTopic(MessageTopic.putaiArchive);
-		model.setTag(MessageTag.putai_message_update);
+		MessageModel model=new MessageModel(MessageTopic.PUTAI_ARCHIVE);
+		model.setTopic(MessageTopic.PUTAI_ARCHIVE);
+		model.setTag(MessageTag.PUTAI_MESSAGE_UPDATE);
 		model.setId("123");
 		producer.sendMessage(model);
 		return "update";

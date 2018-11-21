@@ -1,6 +1,7 @@
 package com.pt.recommend.message;
 
 import com.alibaba.fastjson.JSONObject;
+import com.pt.recommend.util.CamelUtils;
 
 public class MessageModel {
 
@@ -19,7 +20,7 @@ public class MessageModel {
 	}
 
 	public String getTopic() {
-		return this.topic.toString();
+		return CamelUtils.camelCaseName(this.topic.toString());
 	}
 
 	public void setTopic(MessageTopic topic) {
@@ -35,7 +36,7 @@ public class MessageModel {
 	}
 
 	public String getTag() {
-		return this.tag.toString();
+		return CamelUtils.camelCaseName(this.tag.toString());
 	}
 
 	public void setTag(MessageTag tag) {

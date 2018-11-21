@@ -90,8 +90,8 @@ public class ZhuSuController {
 		zhuSu.setName(name);
 		
 		MessageModel model=new MessageModel();
-		model.setTopic(MessageTopic.putaiArchive);
-		model.setTag(MessageTag.zhuSu_create);
+		model.setTopic(MessageTopic.PUTAI_ARCHIVE);
+		model.setTag(MessageTag.ZHUSU_CREATE);
 		model.setId(zhuSu.getId()+"");
 		
 		JSONObject info=new JSONObject();

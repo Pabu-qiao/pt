@@ -9,13 +9,13 @@ public enum MessageTag {
 	/**
 	 * @Fields putai_message_create:创建
 	 */
-	putai_message_create,
+	PUTAI_MESSAGE_CREATE,
 	
 	/**
 	 * @Fields putai_message_update:更新
 	 */
-	putai_message_update,
+	PUTAI_MESSAGE_UPDATE,
 	
-	zhuSu_create;
+	ZHUSU_CREATE;
 	
 }

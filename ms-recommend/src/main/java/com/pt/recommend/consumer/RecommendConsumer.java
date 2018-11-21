@@ -23,6 +23,7 @@ import com.pt.recommend.message.MessageTopic;
 import com.pt.recommend.service.RecommendBaseService;
 import com.pt.recommend.service.ZhengZhuangService;
 import com.pt.recommend.service.ZhuSuService;
+import com.pt.recommend.util.CamelUtils;
 
 /**
  * @ClassName: RecommendConsumer
@@ -64,8 +65,8 @@ public class RecommendConsumer {
 			return BUILDER;
 		}
 		public Builder setSubscribe(MessageTopic messageTopic,MessageTag messageTag) {
-			String topic=messageTopic.toString();
-			String tag=messageTag.toString();
+			String topic=CamelUtils.camelCaseName(messageTopic.toString());
+			String tag=CamelUtils.camelCaseName(messageTag.toString());
 			tag=StringUtils.equalsIgnoreCase("all", tag)?"*":tag;
 			try {
 				BUILDER.consumer.subscribe(topic, tag);
@@ -143,7 +144,7 @@ public class RecommendConsumer {
 								return null;
 							}
 							//新增客户
-							if (MessageTag.zhuSu_create.toString().equals(msg.getTags())) {
+							if (MessageTag.ZHUSU_CREATE.toString().equals(msg.getTags())) {
 								log.info("新增用户");
 								JSONObject info = model.getInfo();
 								ZhuSu zhuSu = JSON.parseObject(info.getString("zhuSu"),ZhuSu.class);
@@ -151,7 +152,7 @@ public class RecommendConsumer {
 								zhuSuService.saveZhuSu(zhuSu, fangAn);
 							}
 							//更新老客户
-							if (MessageTag.putai_message_update.toString().equals(msg.getTags())) {
+							if (MessageTag.PUTAI_MESSAGE_UPDATE.toString().equals(msg.getTags())) {
 								zhengZhuangService.getAllZhengZhuang();
 								log.info("更新用户");
 							}
