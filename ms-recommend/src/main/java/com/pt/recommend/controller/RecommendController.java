@@ -75,8 +75,8 @@ public class RecommendController {
 				for (FuWu fuWu : set) {
 					plan.setReDu((plan.getReDu() == null ? 0 : plan.getReDu())
 							+ (fuWu.getReDu() == null ? 0 : fuWu.getReDu()));
-					plan.setJiaGe((plan.getJiaGe() == null ? new BigDecimal(0) : plan.getJiaGe())
-							.add(fuWu.getJiaGe() == null ? new BigDecimal(0) : fuWu.getJiaGe()));
+					plan.setJiaGe((plan.getJiaGe() == null ?BigDecimal.valueOf(0) : plan.getJiaGe())
+							.add(fuWu.getJiaGe() == null ? BigDecimal.valueOf(0) : fuWu.getJiaGe()));
 					plan.setShiChang((plan.getShiChang() == null ? 0 : plan.getShiChang())
 							+ (fuWu.getShiChang() == null ? 0 : fuWu.getShiChang()));
 				}
@@ -101,7 +101,6 @@ public class RecommendController {
 				if (hotPlan.getReDu() == null || plan.getReDu() > hotPlan.getReDu()) {
 					hotPlan.setFuWuXiang(plan.getFuWuXiang());
 					hotPlan.setReDu(plan.getReDu());
-					;
 					hotPlan.setJiaGe(plan.getJiaGe());
 					hotPlan.setShiChang(plan.getShiChang());
 					hotPlan.setFangAnMing("火热爆款");
@@ -109,7 +108,6 @@ public class RecommendController {
 				if (timePlan.getShiChang() == null || plan.getShiChang() < timePlan.getShiChang()) {
 					timePlan.setFuWuXiang(plan.getFuWuXiang());
 					timePlan.setReDu(plan.getReDu());
-					;
 					timePlan.setJiaGe(plan.getJiaGe());
 					timePlan.setShiChang(plan.getShiChang());
 					timePlan.setFangAnMing("节省时间");
@@ -117,7 +115,6 @@ public class RecommendController {
 				if (pricePlan.getJiaGe() == null || plan.getJiaGe().compareTo(pricePlan.getJiaGe()) < 0) {
 					pricePlan.setFuWuXiang(plan.getFuWuXiang());
 					pricePlan.setReDu(plan.getReDu());
-					;
 					pricePlan.setJiaGe(plan.getJiaGe());
 					pricePlan.setShiChang(plan.getShiChang());
 					pricePlan.setFangAnMing("经济实惠");
