@@ -1,6 +1,6 @@
 package com.pt.msarchive.entity;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,10 +24,10 @@ public class HealthInfo implements Cloneable{
 	private String customerId;
 	
 	@Column(name="create_date",columnDefinition="datetime",updatable=false,insertable=false)
-	private Date create_date;
+	private LocalDateTime create_date;
 	
 	@Column(name="update_date",columnDefinition="datetime",updatable=false,insertable=false)
-	private Date update_date;
+	private LocalDateTime update_date;
 	
 	@Column(name="info",columnDefinition="text")
 	private String info;
@@ -43,11 +43,11 @@ public class HealthInfo implements Cloneable{
 		this.customerId = customerId;
 	}
 
-	public Date getCreate_date() {
+	public LocalDateTime getCreate_date() {
 		return create_date;
 	}
 
-	public Date getUpdate_date() {
+	public LocalDateTime getUpdate_date() {
 		return update_date;
 	}
 
@@ -71,8 +71,8 @@ public class HealthInfo implements Cloneable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		clone.create_date=(Date) this.create_date.clone();
-		clone.update_date=(Date) this.update_date.clone();
+//		clone.create_date=(LocalDateTime) this.create_date.clone();
+//		clone.update_date=(LocalDateTime) this.update_date.clone();
 		return clone;
 	}
 }
