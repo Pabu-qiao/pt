@@ -1,7 +1,5 @@
 package com.pt.recommend.service.impl;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,8 +18,7 @@ public class FangAnServiceImpl implements FangAnService {
 	@Override
 	public FangAn getById(Integer id) {
 		// TODO Auto-generated method stub
-		Optional<FangAn> findById = fangAnDao.findById(id);
-		return findById.orElse(null);
+		return fangAnDao.findById(id).orElse(null);
 	}
 
 }
