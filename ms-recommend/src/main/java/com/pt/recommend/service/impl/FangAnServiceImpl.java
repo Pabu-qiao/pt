@@ -21,10 +21,7 @@ public class FangAnServiceImpl implements FangAnService {
 	public FangAn getById(Integer id) {
 		// TODO Auto-generated method stub
 		Optional<FangAn> findById = fangAnDao.findById(id);
-		if (findById.isPresent()) {
-			return findById.get();
-		}
-		return null;
+		return findById.orElse(null);
 	}
 
 }
