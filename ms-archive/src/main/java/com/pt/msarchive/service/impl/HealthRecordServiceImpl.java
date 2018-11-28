@@ -2,6 +2,7 @@ package com.pt.msarchive.service.impl;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,7 +31,13 @@ public class HealthRecordServiceImpl implements HealthRecordService {
 	public PtResult<HealthRecord> getByDate(String customerId, String beginDate, String endDate) {
 		// TODO Auto-generated method stub
 		List<HealthRecord> list = null;
-		list = healthRecordDao.findByCustomerIdAndRecordDateGreaterThanEqualAndRecordDateLessThanEqual(customerId, LocalDate.parse(beginDate, formatter), LocalDate.parse(endDate,formatter));
+		try {
+			list = healthRecordDao.findByCustomerIdAndRecordDateGreaterThanEqualAndRecordDateLessThanEqual(customerId, LocalDate.parse(beginDate, formatter), LocalDate.parse(endDate,formatter));
+		} catch (DateTimeParseException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			return PtResult.build(PtEnum.CODE_05);
+		}
 		if (list==null||list.size()<1) {
 			return PtResult.build(PtEnum.CODE_03);
 		}

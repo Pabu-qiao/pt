@@ -5,7 +5,8 @@ public enum PtEnum {
 	CODE_01("01", "正常,有返回值"),
 	CODE_02("02", "正常,无返回值"),
 	CODE_03("03", "未查询到相应数据"),
-	CODE_04("04", "保存数据出错");
+	CODE_04("04", "保存数据出错"),
+	CODE_05("05", "日期参数格式错误");
 
 	private final String code;
 	private final String desc;
