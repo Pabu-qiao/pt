@@ -3,8 +3,9 @@ package com.pt.recommend.service;
 import java.util.List;
 
 import com.pt.recommend.entity.ZhengZhuang;
+import com.pt.recommend.model.PtResult;
 
-public interface ZhengZhuangService extends RecommendBaseService{
+public interface ZhengZhuangService extends BaseService{
 	
 	/**
 	 * @Title: getPlanBySymptoms
@@ -12,12 +13,12 @@ public interface ZhengZhuangService extends RecommendBaseService{
 	 * @param symptoms
 	 * @return
 	 */
-	List<ZhengZhuang> getPlanByZhengZhuang(List<String> symptoms);
+	PtResult<ZhengZhuang> getPlanByZhengZhuang(List<String> symptoms);
 	
 	/**
 	 * @Title: getALLZhengZhuang
 	 * @Description: 获得所有症状,并分类
 	 * @return
 	 */
-	List<ZhengZhuang> getAllZhengZhuang();
+	PtResult<ZhengZhuang> getAllZhengZhuang();
 }

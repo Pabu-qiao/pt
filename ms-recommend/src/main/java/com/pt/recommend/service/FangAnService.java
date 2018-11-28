@@ -1,7 +1,8 @@
 package com.pt.recommend.service;
 
 import com.pt.recommend.entity.FangAn;
+import com.pt.recommend.model.PtResult;
 
 public interface FangAnService {
-	FangAn getById(Integer id);
+	PtResult<FangAn> getById(Integer id);
 }

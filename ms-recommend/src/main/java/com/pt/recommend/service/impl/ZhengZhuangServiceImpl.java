@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pt.recommend.dao.ZhengZhuangDao;
 import com.pt.recommend.entity.ZhengZhuang;
+import com.pt.recommend.model.PtResult;
 import com.pt.recommend.service.ZhengZhuangService;
 
 @Service
@@ -18,14 +19,14 @@ public class ZhengZhuangServiceImpl implements ZhengZhuangService {
 	private ZhengZhuangDao dao;
 
 	@Override
-	public List<ZhengZhuang> getPlanByZhengZhuang(List<String> zhengzhuangs) {
+	public PtResult<ZhengZhuang> getPlanByZhengZhuang(List<String> zhengzhuangs) {
 		// TODO Auto-generated method stub
-		return dao.findByZhengZhuangIn(zhengzhuangs);
+		return PtResult.ok(dao.findByZhengZhuangIn(zhengzhuangs));
 	}
 
 	@Override
-	public List<ZhengZhuang> getAllZhengZhuang() {
+	public PtResult<ZhengZhuang> getAllZhengZhuang() {
 		// TODO Auto-generated method stub
-		return dao.findAll();
+		return PtResult.ok(dao.findAll());
 	}
 }

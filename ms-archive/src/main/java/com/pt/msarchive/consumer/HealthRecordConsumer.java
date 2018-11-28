@@ -17,7 +17,7 @@ import com.alibaba.rocketmq.common.message.MessageExt;
 import com.pt.msarchive.message.MessageModel;
 import com.pt.msarchive.message.MessageTag;
 import com.pt.msarchive.message.MessageTopic;
-import com.pt.msarchive.service.ArchiveBaseService;
+import com.pt.msarchive.service.BaseService;
 import com.pt.msarchive.service.HealthRecordService;
 
 /**
@@ -82,8 +82,8 @@ public class HealthRecordConsumer {
 			BUILDER.consumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
 			return BUILDER;
 		}
-		public Builder setServices(ArchiveBaseService...services) {
-			for (ArchiveBaseService service : services) {
+		public Builder setServices(BaseService...services) {
+			for (BaseService service : services) {
 				if (service instanceof HealthRecordService) {
 					INSTANCE.recordService=(HealthRecordService) service;
 					log.info("recordservice:{}",service);

@@ -1,9 +1,8 @@
 package com.pt.msarchive.service;
 
-import java.util.List;
-
 import com.alibaba.fastjson.JSONObject;
 import com.pt.msarchive.entity.HealthInfo;
+import com.pt.msarchive.model.PtResult;
 
 /**
  * @ClassName: HealthInfoService
@@ -12,14 +11,14 @@ import com.pt.msarchive.entity.HealthInfo;
  * @date 2018年10月23日
  *
  */
-public interface HealthInfoService extends ArchiveBaseService{
+public interface HealthInfoService extends BaseService{
 
 	/**
 	 * @Title: getAll
 	 * @Description: 获得所有用户的健康信息
 	 * @return
 	 */
-	List<HealthInfo> getAll();
+	PtResult<HealthInfo> getAll();
 	
 	/**
 	 * @Title: getById
@@ -27,7 +26,7 @@ public interface HealthInfoService extends ArchiveBaseService{
 	 * @param customerId
 	 * @return
 	 */
-	HealthInfo getById(String customerId);
+	PtResult<HealthInfo> getById(String customerId);
 	
 	/**
 	 * @Title: add
@@ -36,7 +35,7 @@ public interface HealthInfoService extends ArchiveBaseService{
 	 * @param info
 	 * @return
 	 */
-	HealthInfo add(String customerId,JSONObject info);
+	PtResult<HealthInfo> add(String customerId,JSONObject info);
 	
 	/**
 	 * @Title: update
@@ -44,6 +43,6 @@ public interface HealthInfoService extends ArchiveBaseService{
 	 * @param customerId
 	 * @param info
 	 */
-	HealthInfo update(String customerId,JSONObject info);
+	PtResult<HealthInfo> update(String customerId,JSONObject info);
 	
 }

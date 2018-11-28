@@ -1,13 +1,12 @@
 package com.pt.msarchive.service;
 
-import java.util.List;
-
 import com.alibaba.fastjson.JSONObject;
 import com.pt.msarchive.entity.HealthRecord;
+import com.pt.msarchive.model.PtResult;
 
-public interface HealthRecordService extends ArchiveBaseService{
+public interface HealthRecordService extends BaseService{
 
-	List<HealthRecord> getAll(String customerId );
+	PtResult<HealthRecord> getAll(String customerId );
 	
 	
 	/**
@@ -18,7 +17,7 @@ public interface HealthRecordService extends ArchiveBaseService{
 	 * @param endDate
 	 * @return
 	 */
-	List<HealthRecord> getByDate(String customerId,String beginDate,String endDate);
+	PtResult<HealthRecord> getByDate(String customerId,String beginDate,String endDate);
 	
 	/**
 	 * @Title: saveRecord
@@ -27,6 +26,6 @@ public interface HealthRecordService extends ArchiveBaseService{
 	 * @param dataJson
 	 * @return
 	 */
-	HealthRecord saveRecord(String customerId,JSONObject info);
+	PtResult<HealthRecord> saveRecord(String customerId,JSONObject info);
 	
 }

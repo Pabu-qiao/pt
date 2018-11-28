@@ -7,6 +7,6 @@ package com.pt.msarchive.service;
  * @date 2018年11月13日
  *
  */
-public interface ArchiveBaseService {
+public interface BaseService {
 
 }

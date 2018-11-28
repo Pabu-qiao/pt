@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pt.recommend.entity.FuWu;
 import com.pt.recommend.entity.ZhengZhuang;
 import com.pt.recommend.model.Plan;
+import com.pt.recommend.model.PtResult;
 import com.pt.recommend.service.ZhengZhuangService;
+import com.pt.recommend.util.PtEnum;
 import com.pt.recommend.util.ResponseUtil;
 
 @RestController
@@ -34,19 +36,29 @@ public class RecommendController {
 		String[] split = params.split(",");
 		List<String> zhengzhuangs = Arrays.asList(split);
 		
-		List<ZhengZhuang> all = zhengZhuangService.getPlanByZhengZhuang(zhengzhuangs);
+		PtResult<ZhengZhuang> pt = zhengZhuangService.getPlanByZhengZhuang(zhengzhuangs);
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		List<ZhengZhuang> all=pt.getData();
+		
 		List<Plan> result = null;
 		if (all.size() > 0) {
 			result = Combination(all, new HashSet<FuWu>() , 0);
 		}
 		//筛选方案
 		List<Plan> temp = select(result);
-		return ResponseUtil.toJson(temp);
+		return ResponseUtil.toJson(PtResult.ok(temp));
 	}
 	
 	@GetMapping("/zhengZhuangs")
 	public ResponseEntity<String> getAllZhengZhuang(){
-		List<ZhengZhuang> all = zhengZhuangService.getAllZhengZhuang();
+		PtResult<ZhengZhuang> pt = zhengZhuangService.getAllZhengZhuang();
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		List<ZhengZhuang> all=pt.getData();
+		
 		Map<String, List<ZhengZhuang>> map = new HashMap<String, List<ZhengZhuang>>();
 		for (ZhengZhuang zhengZhuang : all) {
 			ZhengZhuang clone = zhengZhuang.clone();
@@ -56,7 +68,9 @@ public class RecommendController {
 			}
 			map.get(clone.getFenLei()).add(clone);
 		}
-		return ResponseUtil.toJson(map);
+		List<Map<String, List<ZhengZhuang>>> data=new ArrayList<>();
+		data.add(map);
+		return ResponseUtil.toJson(PtResult.ok(data));
 	}
 	
 	
@@ -89,8 +103,9 @@ public class RecommendController {
 	}
 
 	private List<Plan> select(List<Plan> plans) {
-		List<Plan> result = new ArrayList<Plan>();
+		List<Plan> result = null;
 		if (plans != null && plans.size() > 0) {
+			result=new ArrayList<>();
 			Plan hotPlan = new Plan();
 			hotPlan.setShuoMing("本方案为当季热门方案");
 			Plan timePlan = new Plan();

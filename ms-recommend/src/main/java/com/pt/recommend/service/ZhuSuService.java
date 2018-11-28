@@ -4,8 +4,9 @@ import java.util.List;
 
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
+import com.pt.recommend.model.PtResult;
 
-public interface ZhuSuService extends RecommendBaseService {
+public interface ZhuSuService extends BaseService {
 
 	/**
 	 * @Title: getPlanByZhuSuId
@@ -13,7 +14,7 @@ public interface ZhuSuService extends RecommendBaseService {
 	 * @param ids
 	 * @return
 	 */
-	List<ZhuSu> getPlanByZhuSuId(List<Integer> ids);
+	PtResult<ZhuSu> getPlanByZhuSuId(List<Integer> ids);
 	
 	/**
 	 * @Title: getPlanByZhuSus
@@ -21,14 +22,14 @@ public interface ZhuSuService extends RecommendBaseService {
 	 * @param name
 	 * @return
 	 */
-	List<ZhuSu> getPlanByZhuSus(List<String> names);
+	PtResult<ZhuSu> getPlanByZhuSus(List<String> names);
 
 	/**
 	 * @Title: getAllZhuSu
 	 * @Description: TODO(这里用一句话描述这个方法的作用)
 	 * @return
 	 */
-	List<ZhuSu> getAllZhuSu();
+	PtResult<ZhuSu> getAllZhuSu();
 
 	/**
 	 * @Title: saveZhuSu
@@ -37,5 +38,5 @@ public interface ZhuSuService extends RecommendBaseService {
 	 * @param fangAn
 	 * @return
 	 */
-	ZhuSu saveZhuSu(ZhuSu zhuSu, FangAn fangAn);
+	PtResult<ZhuSu> saveZhuSu(ZhuSu zhuSu, FangAn fangAn);
 }

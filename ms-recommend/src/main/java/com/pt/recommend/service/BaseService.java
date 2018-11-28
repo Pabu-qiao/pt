@@ -7,6 +7,6 @@ package com.pt.recommend.service;
  * @date 2018年11月13日
  *
  */
-public interface RecommendBaseService {
+public interface BaseService {
 
 }

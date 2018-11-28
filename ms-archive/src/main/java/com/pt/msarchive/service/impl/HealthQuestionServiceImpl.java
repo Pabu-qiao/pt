@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pt.msarchive.dao.HealthQuestionDao;
 import com.pt.msarchive.entity.HealthQuestion;
 import com.pt.msarchive.enums.QUESTION_ORIGIN;
+import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthQuestionService;
+import com.pt.msarchive.util.PtEnum;
 
 /**
  * @ClassName: HealthQuestionServiceImpl
@@ -29,13 +31,17 @@ public class HealthQuestionServiceImpl implements HealthQuestionService {
 	private HealthQuestionDao questionDao;
 	
 	@Override
-	public List<HealthQuestion> getAll() {
+	public PtResult<HealthQuestion> getAll() {
 		// TODO Auto-generated method stub
-		return questionDao.findAll();
+		List<HealthQuestion> all = questionDao.findAll();
+		if (all==null||all.size()<1) {
+			return PtResult.build(PtEnum.CODE_03);
+		}
+		return PtResult.ok(all);
 	}
 
 	@Override
-	public List<HealthQuestion> getByOrigin(QUESTION_ORIGIN origin) {
+	public PtResult<HealthQuestion> getByOrigin(QUESTION_ORIGIN origin) {
 		// TODO Auto-generated method stub
 		List<HealthQuestion> list = questionDao.findAll(new Example<HealthQuestion>() {
 
@@ -56,7 +62,10 @@ public class HealthQuestionServiceImpl implements HealthQuestionService {
 			}
 		});
 		
-		return list;
+		if (list==null||list.size()<1) {
+			return PtResult.build(PtEnum.CODE_03);
+		}
+		return PtResult.ok(list);
 	}
 
 }

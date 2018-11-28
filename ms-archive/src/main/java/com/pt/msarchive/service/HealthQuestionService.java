@@ -1,9 +1,8 @@
 package com.pt.msarchive.service;
 
-import java.util.List;
-
 import com.pt.msarchive.entity.HealthQuestion;
 import com.pt.msarchive.enums.QUESTION_ORIGIN;
+import com.pt.msarchive.model.PtResult;
 
 /**
  * @ClassName: HealthQuestionService
@@ -12,8 +11,8 @@ import com.pt.msarchive.enums.QUESTION_ORIGIN;
  * @date 2018年11月2日
  *
  */
-public interface HealthQuestionService extends ArchiveBaseService{
+public interface HealthQuestionService extends BaseService{
 
-	List<HealthQuestion> getAll();
-	List<HealthQuestion> getByOrigin(QUESTION_ORIGIN origin);
+	PtResult<HealthQuestion> getAll();
+	PtResult<HealthQuestion> getByOrigin(QUESTION_ORIGIN origin);
 }

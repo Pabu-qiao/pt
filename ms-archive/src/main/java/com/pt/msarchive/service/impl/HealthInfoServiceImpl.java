@@ -1,5 +1,6 @@
 package com.pt.msarchive.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pt.msarchive.dao.HealthInfoDao;
 import com.pt.msarchive.entity.HealthInfo;
+import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthInfoService;
+import com.pt.msarchive.util.PtEnum;
 
 @Service
 @Transactional
@@ -23,23 +26,29 @@ public class HealthInfoServiceImpl implements HealthInfoService{
 	private HealthInfoDao healthInfoDao;
 	
 	@Override
-	public List<HealthInfo> getAll() {
+	public PtResult<HealthInfo> getAll() {
 		// TODO Auto-generated method stub
-		return healthInfoDao.findAll();
+		List<HealthInfo> all = healthInfoDao.findAll();
+		if (all==null||all.size()<1) {
+			return PtResult.build(PtEnum.CODE_03);
+		}
+		return PtResult.ok(all);
 	}
 	
 	@Override
-	public HealthInfo getById(String customerId) {
+	public PtResult<HealthInfo> getById(String customerId) {
 		// TODO Auto-generated method stub
 		Optional<HealthInfo> findById = healthInfoDao.findById(customerId);
-		if (findById.isPresent()) {
-			return findById.get();
+		if (!findById.isPresent()) {
+			return PtResult.build(PtEnum.CODE_03);
 		}
-		return null;
+		List<HealthInfo> data=new ArrayList<HealthInfo>();
+		data.add(findById.get());
+		return PtResult.ok(data);
 	}
 	
 	@Override
-	public HealthInfo add(String customerId, JSONObject info) {
+	public PtResult<HealthInfo> add(String customerId, JSONObject info) {
 		// TODO Auto-generated method stub
 		HealthInfo entity=new HealthInfo();
 		entity.setCustomerId(customerId);
@@ -48,23 +57,33 @@ public class HealthInfoServiceImpl implements HealthInfoService{
 			map.put(key, info.get(key));
 		}
 		entity.setInfo(JSON.toJSONString(map));
-		return healthInfoDao.save(entity);
+		HealthInfo save = healthInfoDao.save(entity);
+		if (save==null) {
+			return PtResult.build(PtEnum.CODE_04);
+		}
+		List<HealthInfo> data=new ArrayList<HealthInfo>();
+		data.add(save);
+		return PtResult.ok(data);
 	}
 	
 	@Override
-	public HealthInfo update(String customerId, JSONObject info) {
+	public PtResult<HealthInfo> update(String customerId, JSONObject info) {
 		// TODO Auto-generated method stub
 		Optional<HealthInfo> findById=healthInfoDao.findById(customerId);
-		if (findById.isPresent()) {
-			HealthInfo entity= findById.get();
-			Map<String, Object> map=JSON.parseObject(entity.getInfo());
-			for (String key : info.keySet()) {
-				map.put(key, info.get(key));
-			}
-			entity.setInfo(JSON.toJSONString(map));
-			return entity;
+		if (!findById.isPresent()) {
+			return PtResult.build(PtEnum.CODE_03);
 		}
-		return null;
+		
+		HealthInfo entity = findById.get();
+		Map<String, Object> map=JSON.parseObject(entity.getInfo());
+		for (String key : info.keySet()) {
+			map.put(key, info.get(key));
+		}
+		entity.setInfo(JSON.toJSONString(map));
+		
+		List<HealthInfo> data=new ArrayList<HealthInfo>();
+		data.add(entity);
+		return PtResult.ok(data);
 	}
 
 }

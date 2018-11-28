@@ -1,7 +1,8 @@
 package com.pt.msarchive.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,43 +13,54 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pt.msarchive.dao.HealthRecordDao;
 import com.pt.msarchive.entity.HealthRecord;
+import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthRecordService;
+import com.pt.msarchive.util.PtEnum;
 
 @Service
 @Transactional
 public class HealthRecordServiceImpl implements HealthRecordService {
 
-	private final SimpleDateFormat sf=new SimpleDateFormat("yyyy-MM-dd");
+	private final DateTimeFormatter formatter=DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	
 	@Autowired
 	private HealthRecordDao healthRecordDao;
 	
 	@Override
-	public List<HealthRecord> getByDate(String customerId, String beginDate, String endDate) {
+	public PtResult<HealthRecord> getByDate(String customerId, String beginDate, String endDate) {
 		// TODO Auto-generated method stub
 		List<HealthRecord> list = null;
-		try {
-			list = healthRecordDao.findByCustomerIdAndRecordDateGreaterThanEqualAndRecordDateLessThanEqual(customerId, sf.parse(beginDate), sf.parse(endDate));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		list = healthRecordDao.findByCustomerIdAndRecordDateGreaterThanEqualAndRecordDateLessThanEqual(customerId, LocalDate.parse(beginDate, formatter), LocalDate.parse(endDate,formatter));
+		if (list==null||list.size()<1) {
+			return PtResult.build(PtEnum.CODE_03);
 		}
-		return list;
+		return PtResult.ok(list);
 	}
 	
 	@Override
-	public List<HealthRecord> getAll(String customerId) {
+	public PtResult<HealthRecord> getAll(String customerId) {
 		// TODO Auto-generated method stub
-		return healthRecordDao.findAll();
+		List<HealthRecord> all = healthRecordDao.findAll();
+		if (all==null||all.size()<1) {
+			return PtResult.build(PtEnum.CODE_03);
+		}
+		return PtResult.ok(all);
 	}
 
 	@Override
-	public HealthRecord saveRecord(String customerId, JSONObject info) {
+	public PtResult<HealthRecord> saveRecord(String customerId, JSONObject info) {
 		// TODO Auto-generated method stub
 		HealthRecord entity=new HealthRecord();
 		entity.setCustomerId(customerId);
 		entity.setData(JSON.toJSONString(info));
-		return healthRecordDao.save(entity);
+		HealthRecord save = healthRecordDao.save(entity);
+		if (save==null) {
+			return PtResult.build(PtEnum.CODE_04);
+		}
+		
+		List<HealthRecord> data=new ArrayList<HealthRecord>();
+		data.add(entity);
+		return PtResult.ok(data);
 	}
 
 }

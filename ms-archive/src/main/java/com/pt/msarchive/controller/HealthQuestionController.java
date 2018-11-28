@@ -1,7 +1,5 @@
 package com.pt.msarchive.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -11,7 +9,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pt.msarchive.entity.HealthQuestion;
 import com.pt.msarchive.enums.QUESTION_ORIGIN;
+import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthQuestionService;
+import com.pt.msarchive.util.PtEnum;
 import com.pt.msarchive.util.ResponseUtil;
 
 @Controller
@@ -27,8 +27,11 @@ public class HealthQuestionController {
 	 */
 	@GetMapping("/questions")
 	public ResponseEntity<String> getAll() {
-		List<HealthQuestion> temp = questinService.getAll();
-		return ResponseUtil.toJson(temp);
+		PtResult<HealthQuestion> pt = questinService.getAll();
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		return ResponseUtil.toJson(PtResult.ok(pt.getData()));
 	}
 
 	/**
@@ -41,12 +44,16 @@ public class HealthQuestionController {
 	@ResponseBody
 	public ResponseEntity<String> getQuetionsByOrigin(@PathVariable String origin) {
 		// TODO Auto-generated method stub
-		List<HealthQuestion> list=null;
+		PtResult<HealthQuestion> pt=null;
 		if (origin.equalsIgnoreCase(QUESTION_ORIGIN.CUSTOMER.toString())) {
-			list= questinService.getByOrigin(QUESTION_ORIGIN.CUSTOMER);
+			pt = questinService.getByOrigin(QUESTION_ORIGIN.CUSTOMER);
 		} else if (origin.equalsIgnoreCase(QUESTION_ORIGIN.SYSTEM.toString())) {
-			list= questinService.getByOrigin(QUESTION_ORIGIN.SYSTEM);
+			pt = questinService.getByOrigin(QUESTION_ORIGIN.SYSTEM);
 		}
-		return ResponseUtil.toJson(list);
+		
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		return ResponseUtil.toJson(PtResult.ok(pt.getData()));
 	}
 }

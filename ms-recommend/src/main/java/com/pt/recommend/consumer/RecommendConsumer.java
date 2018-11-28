@@ -20,7 +20,7 @@ import com.pt.recommend.entity.ZhuSu;
 import com.pt.recommend.message.MessageModel;
 import com.pt.recommend.message.MessageTag;
 import com.pt.recommend.message.MessageTopic;
-import com.pt.recommend.service.RecommendBaseService;
+import com.pt.recommend.service.BaseService;
 import com.pt.recommend.service.ZhengZhuangService;
 import com.pt.recommend.service.ZhuSuService;
 import com.pt.recommend.util.CamelUtils;
@@ -88,8 +88,8 @@ public class RecommendConsumer {
 			BUILDER.consumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
 			return BUILDER;
 		}
-		public Builder setServices(RecommendBaseService...services) {
-			for (RecommendBaseService service : services) {
+		public Builder setServices(BaseService...services) {
+			for (BaseService service : services) {
 				if (service instanceof ZhengZhuangService) {
 					INSTANCE.zhengZhuangService=(ZhengZhuangService) service;
 					log.info("症状service:{}",service);

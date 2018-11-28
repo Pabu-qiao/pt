@@ -1,6 +1,6 @@
 package com.pt.msarchive.dao;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,5 +26,5 @@ public interface HealthServiceDao extends JpaRepository<HealthService, Integer>{
 	 * @param endDate
 	 * @return
 	 */
-	List<HealthService> findByCustomerIdAndServiceDateGreaterThanEqualAndServiceDateLessThanEqual(String customerId,Date beginDate,Date endDate);
+	List<HealthService> findByCustomerIdAndServiceDateGreaterThanEqualAndServiceDateLessThanEqual(String customerId,LocalDate beginDate,LocalDate endDate);
 }

@@ -22,8 +22,10 @@ import com.pt.recommend.message.MessageModel;
 import com.pt.recommend.message.MessageProducer;
 import com.pt.recommend.message.MessageTag;
 import com.pt.recommend.message.MessageTopic;
+import com.pt.recommend.model.PtResult;
 import com.pt.recommend.service.FangAnService;
 import com.pt.recommend.service.ZhuSuService;
+import com.pt.recommend.util.PtEnum;
 import com.pt.recommend.util.ResponseUtil;
 
 @RestController
@@ -45,13 +47,19 @@ public class ZhuSuController {
 			ids.add(new Integer(str));
 		}
 		
-		List<ZhuSu> list = zhuSuService.getPlanByZhuSuId(ids);
+		PtResult<ZhuSu> pt = zhuSuService.getPlanByZhuSuId(ids);
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		List<ZhuSu> list=pt.getData();
+		
 		Set<FangAn> fangAns=new HashSet<FangAn>();
 		for (ZhuSu zhuSu : list) {
 			fangAns.add(zhuSu.getFangAn());
 		}
-		
-		return ResponseUtil.toJson(fangAns);
+		List<Set<FangAn>> data=new ArrayList<Set<FangAn>>();
+		data.add(fangAns);
+		return ResponseUtil.toJson(PtResult.ok(data));
 	}
 	
 	@GetMapping("/plans2")
@@ -60,22 +68,34 @@ public class ZhuSuController {
 		String[] split = zhuSus.split(",");
 		List<String> names = Arrays.asList(split);
 		
-		List<ZhuSu> list = zhuSuService.getPlanByZhuSus(names);
+		PtResult<ZhuSu> pt = zhuSuService.getPlanByZhuSus(names);
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		List<ZhuSu> list=pt.getData();
+		
 		Set<FangAn> fangAns=new HashSet<FangAn>();
 		for (ZhuSu zhuSu : list) {
 			fangAns.add(zhuSu.getFangAn());
 		}
 		
-		return ResponseUtil.toJson(fangAns);
+		List<Set<FangAn>> data=new ArrayList<Set<FangAn>>();
+		data.add(fangAns);
+		return ResponseUtil.toJson(PtResult.ok(data));
 	}
 	
 	@GetMapping("/zhuSus")
 	public ResponseEntity<String> getAllZhuSu(){
-		List<ZhuSu> list = zhuSuService.getAllZhuSu();
+		PtResult<ZhuSu> pt = zhuSuService.getAllZhuSu();
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		List<ZhuSu> list=pt.getData();
+		
 		for (ZhuSu zhuSu : list) {
 			zhuSu.setFangAn(null);
 		}
-		return ResponseUtil.toJson(list);
+		return ResponseUtil.toJson(PtResult.ok(list));
 	}
 	
 	@PostMapping("/zhuSus")
@@ -84,7 +104,11 @@ public class ZhuSuController {
 		String name = jsonObject.getString("name");
 		String fangAnId = jsonObject.getString("fangAnId");
 		
-		FangAn fangAn = fangAnService.getById(new Integer(fangAnId));
+		PtResult<FangAn> pt = fangAnService.getById(new Integer(fangAnId));
+		if (pt.getStatus()!=PtEnum.CODE_01.getCode()&&pt.getStatus()!=PtEnum.CODE_02.getCode()) {
+			return ResponseUtil.toJson(pt);
+		}
+		FangAn fangAn = pt.getData().get(0);
 		ZhuSu zhuSu=new ZhuSu();
 		zhuSu.setId(new Integer(id));
 		zhuSu.setName(name);
@@ -101,6 +125,6 @@ public class ZhuSuController {
 		
 		producer.sendMessage(model);
 		
-		return ResponseUtil.toJson("新增完成");
+		return ResponseUtil.toJson(PtResult.ok(null));
 	}
 }
