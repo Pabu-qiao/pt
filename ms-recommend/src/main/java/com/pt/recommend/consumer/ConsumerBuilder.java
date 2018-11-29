@@ -64,7 +64,7 @@ public interface ConsumerBuilder {
 	
 	/**
 	 * @Title: build
-	 * @Description: 将consumer与实例中的消费者绑定,传入service绑定到实例中。
+	 * @Description: 传入service绑定到实例中。
 	 */
 	@SuppressWarnings("unchecked")
 	public<T extends BaseService> BaseConsumer build(T...services);
