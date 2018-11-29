@@ -37,15 +37,20 @@ public class HealthRecordConsumer implements BaseConsumer {
 
 	public static final ConsumerBuilder builder=new ConsumerBuilder() {
 		@Override
-		public DefaultMQPushConsumer createConsumer() {
+		public DefaultMQPushConsumer bindConsumer() {
 			// TODO Auto-generated method stub
 			return INSTANCE.consumer;
 		}
 		
+		@SuppressWarnings("unchecked")
 		@Override
-		public <T extends BaseService> BaseConsumer build(T t) {
+		public <T extends BaseService> BaseConsumer build(T...services) {
 			// TODO Auto-generated method stub
-			INSTANCE.recordService=(HealthRecordService) t;
+			for (T service : services) {
+				if (service instanceof HealthRecordService) {
+					INSTANCE.recordService=(HealthRecordService) service;
+				}
+			}
 			return INSTANCE;
 		}
 	};

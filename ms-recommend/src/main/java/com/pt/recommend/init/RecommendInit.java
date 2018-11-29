@@ -43,7 +43,7 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 		MessageProducer.getInstance().init("recommendProducer", global.getRocketUrl());
 
 		// 初始化healthInfoConsumer
-		RecommendConsumer.Builder.getInstance()
+		RecommendConsumer.builder
 			.setConsumerGroup("recommendConsumer")
 			.setNamesrvAddr(global.getRocketUrl())
 			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
@@ -51,8 +51,7 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 			.setConsumeThreadMax(100)
 			.setConsumeThreadMin(10)
 			.setConsumeMessageBatchMaxSize(100)
-			.setServices(zhengZhuangService,zhuSuService)
-			.build()
+			.build(zhengZhuangService,zhuSuService)
 			.start();
 	}
 
