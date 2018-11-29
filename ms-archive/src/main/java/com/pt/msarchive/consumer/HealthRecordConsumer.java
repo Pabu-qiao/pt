@@ -2,7 +2,6 @@ package com.pt.msarchive.consumer;
 
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,10 +11,8 @@ import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import com.alibaba.rocketmq.client.exception.MQClientException;
-import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
 import com.pt.msarchive.message.MessageModel;
-import com.pt.msarchive.message.MessageTag;
 import com.pt.msarchive.message.MessageTopic;
 import com.pt.msarchive.service.BaseService;
 import com.pt.msarchive.service.HealthRecordService;
@@ -24,79 +21,36 @@ import com.pt.msarchive.service.HealthRecordService;
  * @ClassName: HealthRecordConsumer
  * @Description: 用户健康记录消费者，用于保存用户健康记录
  * @author 谯雕
- * @date 2018年11月5日
+ * @date 2018年11月29日
  *
  */
-public class HealthRecordConsumer {
+public class HealthRecordConsumer implements BaseConsumer {
 
 	private static final Logger log = LoggerFactory.getLogger(HealthRecordConsumer.class);
 
-	private DefaultMQPushConsumer consumer;
+	private DefaultMQPushConsumer consumer=new DefaultMQPushConsumer();
 	private HealthRecordService recordService;
 
 	private final static HealthRecordConsumer INSTANCE = new HealthRecordConsumer();
 
 	private HealthRecordConsumer() {}
 
-	public static class Builder{
-		private final static Builder BUILDER = new Builder();
-		private Builder(){}
-		public static Builder getInstance() {
-			return BUILDER;
+	public static final ConsumerBuilder builder=new ConsumerBuilder() {
+		@Override
+		public DefaultMQPushConsumer createConsumer() {
+			// TODO Auto-generated method stub
+			return INSTANCE.consumer;
 		}
-		DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
 		
-		public Builder setConsumerGroup(String consumerGroup) {
-			BUILDER.consumer.setConsumerGroup(consumerGroup);
-			return BUILDER;
-		}
-		public Builder setNamesrvAddr(String namesrvAddr) {
-			BUILDER.consumer.setNamesrvAddr(namesrvAddr);
-			return BUILDER;
-		}
-		public Builder setConsumeFromWhere(ConsumeFromWhere fromWhere) {
-			BUILDER.consumer.setConsumeFromWhere(fromWhere);
-			return BUILDER;
-		}
-		public Builder setSubscribe(MessageTopic messageTopic,MessageTag messageTag) {
-			String topic=messageTopic.toString();
-			String tag=messageTag.toString();
-			tag=StringUtils.equalsIgnoreCase("all", tag)?"*":tag;
-			try {
-				BUILDER.consumer.subscribe(topic, tag);
-			} catch (MQClientException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return BUILDER;
-		}
-		public Builder setConsumeThreadMax(Integer consumeThreadMax) {
-			BUILDER.consumer.setConsumeThreadMax(consumeThreadMax);
-			return BUILDER;
-		}
-		public Builder setConsumeThreadMin(Integer consumeThreadMin) {
-			BUILDER.consumer.setConsumeThreadMin(consumeThreadMin);
-			return BUILDER;
-		}
-		public Builder setConsumeMessageBatchMaxSize(Integer consumeMessageBatchMaxSize) {
-			BUILDER.consumer.setConsumeMessageBatchMaxSize(consumeMessageBatchMaxSize);
-			return BUILDER;
-		}
-		public Builder setServices(BaseService...services) {
-			for (BaseService service : services) {
-				if (service instanceof HealthRecordService) {
-					INSTANCE.recordService=(HealthRecordService) service;
-					log.info("recordservice:{}",service);
-				}
-			}
-			return BUILDER;
-		}
-		public HealthRecordConsumer build() {
-			INSTANCE.consumer=consumer;
+		@Override
+		public <T extends BaseService> BaseConsumer build(T t) {
+			// TODO Auto-generated method stub
+			INSTANCE.recordService=(HealthRecordService) t;
 			return INSTANCE;
 		}
-	}
+	};
 
+	@Override
 	public void start() {
 		try {
 			this.consumer.registerMessageListener(new MessageListenerConcurrently() {

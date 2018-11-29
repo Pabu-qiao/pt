@@ -31,12 +31,18 @@ public class DataSourceConfig {
 	@Bean(destroyMethod="close")
 	@Primary
 	public DataSource dataSource() {
-		HikariDataSource dataSource = DataSourceBuilder.create().type(HikariDataSource.class).build();
+		HikariDataSource dataSource = DataSourceBuilder.create()
+														.type(HikariDataSource.class)
+														.driverClassName(dbInfo.getDriverClassName())
+														.url(dbInfo.getUrl())
+														.username(dbInfo.getUsername())
+														.password(dbInfo.getPassword())
+														.build();
 		
-		dataSource.setDriverClassName(dbInfo.getDriverClassName());
-		dataSource.setJdbcUrl(dbInfo.getUrl());
-		dataSource.setUsername(dbInfo.getUsername());
-		dataSource.setPassword(dbInfo.getPassword());
+//		dataSource.setDriverClassName(dbInfo.getDriverClassName());
+//		dataSource.setJdbcUrl(dbInfo.getUrl());
+//		dataSource.setUsername(dbInfo.getUsername());
+//		dataSource.setPassword(dbInfo.getPassword());
 		
 		dataSource.setReadOnly(dbInfo.getOnlyRead());
 		dataSource.setMaxLifetime(dbInfo.getMaxLifeTime());

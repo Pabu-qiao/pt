@@ -49,7 +49,7 @@ public class ArchivesInit implements ApplicationListener<ContextRefreshedEvent>{
 		MessageProducer.getInstance().init("producerName",global.getRocketUrl());
 		
 		//初始化healthInfoConsumer
-		HealthInfoConsumer.Builder.getInstance()
+		HealthInfoConsumer.builder
 			.setConsumerGroup("infoConsumer")
 			.setNamesrvAddr(global.getRocketUrl())
 			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
@@ -57,10 +57,9 @@ public class ArchivesInit implements ApplicationListener<ContextRefreshedEvent>{
 			.setConsumeThreadMax(100)
 			.setConsumeThreadMin(10)
 			.setConsumeMessageBatchMaxSize(100)
-			.setServices(healtInfoService)
-			.build()
+			.build(healtInfoService)
 			.start();
-		HealthRecordConsumer.Builder.getInstance()
+		HealthRecordConsumer.builder
 			.setConsumerGroup("recordConsumer")
 			.setNamesrvAddr(global.getRocketUrl())
 			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
@@ -68,10 +67,9 @@ public class ArchivesInit implements ApplicationListener<ContextRefreshedEvent>{
 			.setConsumeThreadMax(100)
 			.setConsumeThreadMin(10)
 			.setConsumeMessageBatchMaxSize(100)
-			.setServices(recordService)
-			.build()
+			.build(recordService)
 			.start();
-		HealthServiceConsumer.Builder.getInstance()
+		HealthServiceConsumer.builder
 			.setConsumerGroup("healthConsumer")
 			.setNamesrvAddr(global.getRocketUrl())
 			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
@@ -79,8 +77,7 @@ public class ArchivesInit implements ApplicationListener<ContextRefreshedEvent>{
 			.setConsumeThreadMax(100)
 			.setConsumeThreadMin(10)
 			.setConsumeMessageBatchMaxSize(100)
-			.setServices(serviceService)
-			.build()
+			.build(serviceService)
 			.start();
 	}
 
