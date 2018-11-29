@@ -2,9 +2,10 @@ package com.pt.msarchive.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pt.msarchive.entity.HealthRecord;
-import com.pt.msarchive.model.PtResult;
+import com.ptutil.ptbase.PtBaseService;
+import com.ptutil.ptbase.PtResult;
 
-public interface HealthRecordService extends BaseService{
+public interface HealthRecordService extends PtBaseService{
 
 	PtResult<HealthRecord> getAll(String customerId );
 	

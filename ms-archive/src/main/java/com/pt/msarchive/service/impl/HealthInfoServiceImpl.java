@@ -14,9 +14,9 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pt.msarchive.dao.HealthInfoDao;
 import com.pt.msarchive.entity.HealthInfo;
-import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthInfoService;
-import com.pt.msarchive.util.PtEnum;
+import com.ptutil.enums.PtEnum;
+import com.ptutil.ptbase.PtResult;
 
 @Service
 @Transactional

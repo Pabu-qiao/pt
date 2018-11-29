@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pt.msarchive.entity.HealthQuestion;
-import com.pt.msarchive.enums.QUESTION_ORIGIN;
-import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthQuestionService;
-import com.pt.msarchive.util.PtEnum;
-import com.pt.msarchive.util.ResponseUtil;
+import com.ptutil.ResponseUtil;
+import com.ptutil.enums.PtEnum;
+import com.ptutil.enums.QUESTION_ORIGIN;
+import com.ptutil.ptbase.PtResult;
 
 @Controller
 public class HealthQuestionController {

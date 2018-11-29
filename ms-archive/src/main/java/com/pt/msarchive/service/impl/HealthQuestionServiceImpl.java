@@ -2,7 +2,6 @@ package com.pt.msarchive.service.impl;
 
 import java.util.List;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -11,10 +10,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pt.msarchive.dao.HealthQuestionDao;
 import com.pt.msarchive.entity.HealthQuestion;
-import com.pt.msarchive.enums.QUESTION_ORIGIN;
-import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthQuestionService;
-import com.pt.msarchive.util.PtEnum;
+import com.ptutil.enums.PtEnum;
+import com.ptutil.enums.QUESTION_ORIGIN;
+import com.ptutil.ptbase.PtResult;
 
 /**
  * @ClassName: HealthQuestionServiceImpl

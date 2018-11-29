@@ -18,15 +18,15 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
-import com.pt.recommend.message.MessageModel;
-import com.pt.recommend.message.MessageProducer;
-import com.pt.recommend.message.MessageTag;
-import com.pt.recommend.message.MessageTopic;
-import com.pt.recommend.model.PtResult;
 import com.pt.recommend.service.FangAnService;
 import com.pt.recommend.service.ZhuSuService;
-import com.pt.recommend.util.PtEnum;
-import com.pt.recommend.util.ResponseUtil;
+import com.ptutil.ResponseUtil;
+import com.ptutil.enums.PtEnum;
+import com.ptutil.message.MessageModel;
+import com.ptutil.message.MessageProducer;
+import com.ptutil.message.MessageTag;
+import com.ptutil.message.MessageTopic;
+import com.ptutil.ptbase.PtResult;
 
 @RestController
 public class ZhuSuController {
@@ -114,7 +114,7 @@ public class ZhuSuController {
 		zhuSu.setName(name);
 		
 		MessageModel model=new MessageModel();
-		model.setTopic(MessageTopic.PUTAI_ARCHIVE);
+		model.setTopic(MessageTopic.putaiArchive);
 		model.setTag(MessageTag.ZHUSU_CREATE);
 		model.setId(zhuSu.getId()+"");
 		

@@ -1,5 +1,6 @@
 package com.pt.recommend.init;
 
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,14 +8,13 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
-import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.pt.recommend.config.Global;
 import com.pt.recommend.consumer.RecommendConsumer;
-import com.pt.recommend.message.MessageProducer;
-import com.pt.recommend.message.MessageTag;
-import com.pt.recommend.message.MessageTopic;
 import com.pt.recommend.service.ZhengZhuangService;
 import com.pt.recommend.service.ZhuSuService;
+import com.ptutil.message.MessageProducer;
+import com.ptutil.message.MessageTag;
+import com.ptutil.message.MessageTopic;
 
 /**
  * @ClassName: RecommendInit
@@ -47,7 +47,7 @@ public class RecommendInit implements ApplicationListener<ContextRefreshedEvent>
 			.setConsumerGroup("recommendConsumer")
 			.setNamesrvAddr(global.getRocketUrl())
 			.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET)
-			.setSubscribe(MessageTopic.PUTAI_ARCHIVE, MessageTag.ALL)
+			.setSubscribe(MessageTopic.putaiArchive, MessageTag.ALL)
 			.setConsumeThreadMax(100)
 			.setConsumeThreadMin(10)
 			.setConsumeMessageBatchMaxSize(100)

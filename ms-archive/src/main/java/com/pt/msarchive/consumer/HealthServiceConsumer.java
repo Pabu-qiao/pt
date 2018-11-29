@@ -2,20 +2,21 @@ package com.pt.msarchive.consumer;
 
 import java.util.List;
 
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.message.MessageExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import com.alibaba.rocketmq.client.exception.MQClientException;
-import com.alibaba.rocketmq.common.message.MessageExt;
-import com.pt.msarchive.message.MessageModel;
-import com.pt.msarchive.message.MessageTopic;
-import com.pt.msarchive.service.BaseService;
 import com.pt.msarchive.service.HealthServiceService;
+import com.ptutil.consumer.ConsumerBuilder;
+import com.ptutil.message.MessageModel;
+import com.ptutil.ptbase.PtBaseConsumer;
+import com.ptutil.ptbase.PtBaseService;
 
 /**
  * @ClassName: HealthServiceConsumer
@@ -24,7 +25,7 @@ import com.pt.msarchive.service.HealthServiceService;
  * @date 2018年11月29日
  *
  */
-public class HealthServiceConsumer implements BaseConsumer{
+public class HealthServiceConsumer implements PtBaseConsumer{
 
 	private static final Logger log = LoggerFactory.getLogger(HealthServiceConsumer.class);
 
@@ -45,7 +46,7 @@ public class HealthServiceConsumer implements BaseConsumer{
 		
 		@SuppressWarnings("unchecked")
 		@Override
-		public <T extends BaseService> BaseConsumer build(T...services) {
+		public <T extends PtBaseService> PtBaseConsumer build(T...services) {
 			// TODO Auto-generated method stub
 			for (T service : services) {
 				if (service instanceof HealthServiceService) {
@@ -64,19 +65,16 @@ public class HealthServiceConsumer implements BaseConsumer{
 						ConsumeConcurrentlyContext context) {
 					for (MessageExt msg : msgs) {
 						try {
-							if (MessageTopic.putaiArchive.toString().equals(msg.getTopic())) {
-								MessageModel model = JSON.parseObject(new String(msg.getBody()), MessageModel.class);
-								if(model==null) {
-									log.warn("消息内容为空");
-									return null;
-								}
-								healthService.saveRecord(model.getId(), model.getInfo());
-								log.info("保存一条服务记录");
+							MessageModel model = JSON.parseObject(new String(msg.getBody()), MessageModel.class);
+							if(model==null) {
+								log.warn("消息内容为空");
+								return null;
 							}
+							healthService.saveRecord(model.getId(), model.getInfo());
+							log.info("保存一条服务记录");
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
-
 					}
 					return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
 				}

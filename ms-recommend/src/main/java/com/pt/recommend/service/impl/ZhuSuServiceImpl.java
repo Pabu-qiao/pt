@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pt.recommend.dao.ZhuSuDao;
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
-import com.pt.recommend.model.PtResult;
 import com.pt.recommend.service.ZhuSuService;
-import com.pt.recommend.util.PtEnum;
+import com.ptutil.enums.PtEnum;
+import com.ptutil.ptbase.PtResult;
 
 @Service
 @Transactional

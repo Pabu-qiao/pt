@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pt.msarchive.entity.HealthRecord;
-import com.pt.msarchive.model.PtResult;
 import com.pt.msarchive.service.HealthRecordService;
-import com.pt.msarchive.util.PtEnum;
-import com.pt.msarchive.util.ResponseUtil;
+import com.ptutil.ResponseUtil;
+import com.ptutil.enums.PtEnum;
+import com.ptutil.ptbase.PtResult;
 
 @RestController
 public class HealthRecordController {

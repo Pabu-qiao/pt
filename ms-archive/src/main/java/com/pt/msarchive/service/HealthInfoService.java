@@ -2,7 +2,8 @@ package com.pt.msarchive.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.pt.msarchive.entity.HealthInfo;
-import com.pt.msarchive.model.PtResult;
+import com.ptutil.ptbase.PtBaseService;
+import com.ptutil.ptbase.PtResult;
 
 /**
  * @ClassName: HealthInfoService
@@ -11,7 +12,7 @@ import com.pt.msarchive.model.PtResult;
  * @date 2018年10月23日
  *
  */
-public interface HealthInfoService extends BaseService{
+public interface HealthInfoService extends PtBaseService{
 
 	/**
 	 * @Title: getAll

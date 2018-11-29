@@ -2,24 +2,26 @@ package com.pt.recommend.consumer;
 
 import java.util.List;
 
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.common.message.MessageExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.alibaba.rocketmq.client.consumer.DefaultMQPushConsumer;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
-import com.alibaba.rocketmq.client.exception.MQClientException;
-import com.alibaba.rocketmq.common.message.MessageExt;
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
-import com.pt.recommend.message.MessageModel;
-import com.pt.recommend.message.MessageTag;
-import com.pt.recommend.service.BaseService;
 import com.pt.recommend.service.ZhengZhuangService;
 import com.pt.recommend.service.ZhuSuService;
+import com.ptutil.consumer.ConsumerBuilder;
+import com.ptutil.message.MessageModel;
+import com.ptutil.message.MessageTag;
+import com.ptutil.ptbase.PtBaseConsumer;
+import com.ptutil.ptbase.PtBaseService;
 
 /**
  * @ClassName: RecommendConsumer
@@ -28,7 +30,7 @@ import com.pt.recommend.service.ZhuSuService;
  * @date 2018年11月12日
  *
  */
-public class RecommendConsumer implements BaseConsumer{
+public class RecommendConsumer implements PtBaseConsumer{
 
 	private static final Logger log = LoggerFactory.getLogger(RecommendConsumer.class);
 
@@ -50,9 +52,9 @@ public class RecommendConsumer implements BaseConsumer{
 		
 		@Override
 		@SuppressWarnings("unchecked")
-		public <T extends BaseService> BaseConsumer build(T... services) {
+		public <T extends PtBaseService> PtBaseConsumer build(T... services) {
 			// TODO Auto-generated method stub
-			for (BaseService service : services) {
+			for (PtBaseService service : services) {
 				if (service instanceof ZhengZhuangService) {
 					INSTANCE.zhengZhuangService=(ZhengZhuangService) service;
 					log.info("症状service:{}",service);

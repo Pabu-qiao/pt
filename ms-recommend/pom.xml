@@ -8,16 +8,9 @@
   <artifactId>ms-recommend</artifactId>
   <dependencies>
   	<dependency>
-  		<groupId>org.springframework.boot</groupId>
-  		<artifactId>spring-boot-starter-web</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.alibaba</groupId>
-  		<artifactId>fastjson</artifactId>
-  	</dependency>
-  	<dependency>
-  		<groupId>com.alibaba.rocketmq</groupId>
-  		<artifactId>rocketmq-client</artifactId>
+  		<groupId>com.pt</groupId>
+  		<artifactId>pt-util</artifactId>
+  		<version>0.0.1-SNAPSHOT</version>
   	</dependency>
   	<dependency>
   		<groupId>org.springframework.boot</groupId>

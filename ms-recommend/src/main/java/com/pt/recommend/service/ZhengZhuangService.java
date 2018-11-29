@@ -3,9 +3,10 @@ package com.pt.recommend.service;
 import java.util.List;
 
 import com.pt.recommend.entity.ZhengZhuang;
-import com.pt.recommend.model.PtResult;
+import com.ptutil.ptbase.PtBaseService;
+import com.ptutil.ptbase.PtResult;
 
-public interface ZhengZhuangService extends BaseService{
+public interface ZhengZhuangService extends PtBaseService{
 	
 	/**
 	 * @Title: getPlanBySymptoms

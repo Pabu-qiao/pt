@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.pt.recommend.entity.FuWu;
 import com.pt.recommend.entity.ZhengZhuang;
 import com.pt.recommend.model.Plan;
-import com.pt.recommend.model.PtResult;
 import com.pt.recommend.service.ZhengZhuangService;
-import com.pt.recommend.util.PtEnum;
-import com.pt.recommend.util.ResponseUtil;
+import com.ptutil.ResponseUtil;
+import com.ptutil.enums.PtEnum;
+import com.ptutil.ptbase.PtResult;
 
 @RestController
 public class RecommendController {

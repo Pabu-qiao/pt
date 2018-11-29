@@ -4,9 +4,10 @@ import java.util.List;
 
 import com.pt.recommend.entity.FangAn;
 import com.pt.recommend.entity.ZhuSu;
-import com.pt.recommend.model.PtResult;
+import com.ptutil.ptbase.PtBaseService;
+import com.ptutil.ptbase.PtResult;
 
-public interface ZhuSuService extends BaseService {
+public interface ZhuSuService extends PtBaseService {
 
 	/**
 	 * @Title: getPlanByZhuSuId

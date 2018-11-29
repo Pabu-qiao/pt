@@ -12,8 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import com.alibaba.fastjson.JSON;
-import com.pt.msarchive.enums.QUESTION_ORIGIN;
 import com.pt.msarchive.model.item.HealthQuestionItem;
+import com.ptutil.enums.QUESTION_ORIGIN;
 
 /**
  * @ClassName: HealthQuestion

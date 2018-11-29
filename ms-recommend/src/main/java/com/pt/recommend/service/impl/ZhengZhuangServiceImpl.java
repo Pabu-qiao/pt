@@ -8,8 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pt.recommend.dao.ZhengZhuangDao;
 import com.pt.recommend.entity.ZhengZhuang;
-import com.pt.recommend.model.PtResult;
 import com.pt.recommend.service.ZhengZhuangService;
+import com.ptutil.ptbase.PtResult;
 
 @Service
 @Transactional
